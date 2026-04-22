@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  background: #F5F3EE;
+  padding: 44px 36px 52px;
+}
+
+.wrap { width: 860px; margin: 0 auto; }
+
+.title {
+  text-align: center;
+  font-size: 15px;
+  font-weight: 700;
+  color: #1E1D1A;
+  margin-bottom: 24px;
+  letter-spacing: -0.01em;
+}
+
+/* ── Fornecedor ── */
+.forn-wrap { display: flex; justify-content: center; }
+.forn {
+  background: #E8E6DF;
+  border: 1.5px solid #C5C2B8;
+  border-radius: 12px;
+  padding: 14px 48px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #2C2A26;
+}
+
+/* ── Scatter zone ── */
+.scatter {
+  position: relative;
+  width: 100%;
+  height: 62px;
+  margin: 0;
+}
+.scatter svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: visible; }
+
+/* ── Row ── */
+.row {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+}
+
+/* ── Value box ── */
+.vb {
+  width: 122px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  padding: 14px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  border-width: 1.5px;
+  border-style: solid;
+}
+.vb-lbl {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .09em;
+}
+.vb-num {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+.vb-sub {
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.35;
+  opacity: .85;
+}
+.vb-empty {
+  font-size: 11px;
+  font-weight: 400;
+  font-style: italic;
+  opacity: .5;
+}
+
+/* ── Layer box ── */
+.lb {
+  flex: 1;
+  border-radius: 12px;
+  padding: 16px 16px 16px 54px;
+  position: relative;
+  border-width: 1.5px;
+  border-style: solid;
+}
+.num {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 700; color: #fff;
+}
+.lt { font-size: 14px; font-weight: 700; margin-bottom: 4px; line-height: 1.3; letter-spacing: -0.01em; }
+.ls { font-size: 12px; font-weight: 400; line-height: 1.4; }
+.badge {
+  display: inline-block; font-size: 10px; padding: 2px 10px;
+  border-radius: 20px; font-weight: 600; vertical-align: middle; margin-left: 8px;
+}
+
+/* ── Cap box ── */
+.cb {
+  width: 185px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  padding: 14px 16px;
+  border-width: 1.5px; border-style: solid;
+  display: flex; flex-direction: column; justify-content: center; gap: 7px;
+}
+.cb-lbl { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .09em; }
+.cb-val { font-size: 14px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
+
+/* ── Arrow only ── */
+.arrow-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 28px;
+}
+
+/* ── Final ── */
+.fin-wrap { display: flex; justify-content: center; }
+.fin {
+  background: #EBF4DC;
+  border: 2px solid #4A8220;
+  border-radius: 12px;
+  padding: 16px 52px;
+  font-size: 15px; font-weight: 700; color: #2A5810;
+  letter-spacing: -0.01em;
+}
+
+/* ── Bottom ── */
+.bottom { margin-top: 20px; }
+.total-chips {
+  display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 12px;
+}
+.chip {
+  background: #ECEAE3; border: 1px solid #C8C5BB; border-radius: 8px;
+  padding: 9px 20px; text-align: center;
+}
+.chip-lbl { font-size: 9px; font-weight: 700; color: #888680; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 2px; }
+.chip-val { font-size: 15px; font-weight: 700; color: #1E1D1A; letter-spacing: -0.01em; }
+.footer { font-size: 11px; color: #9B998F; text-align: center; line-height: 1.6; }
+
+/* ══ COLOR THEMES ══ */
+/* Purple */
+.pv { background:#EEEDFE; border-color:#7B72D8; }
+.pv .vb-lbl { color:#534AB7; } .pv .vb-num { color:#3C3489; } .pv .vb-sub { color:#534AB7; }
+.pl { background:#EEEDFE; border-color:#7B72D8; background-image:repeating-linear-gradient(-45deg,transparent,transparent 9px,rgba(83,74,183,.09) 9px,rgba(83,74,183,.09) 11px); }
+.pn { background:#3C3489; } .plt { color:#3C3489; } .pls { color:#534AB7; }
+.pc { background:#EEEDFE; border-color:#7B72D8; } .pc .cb-lbl { color:#534AB7; } .pc .cb-val { color:#3C3489; }
+
+/* Teal */
+.gv { background:#E0F5EE; border-color:#2A9073; }
+.gv .vb-lbl { color:#0F6E56; } .gv .vb-num { color:#085041; } .gv .vb-sub { color:#0F6E56; }
+.gl { background:#E0F5EE; border-color:#2A9073; background-image:repeating-linear-gradient(-45deg,transparent,transparent 9px,rgba(15,110,86,.09) 9px,rgba(15,110,86,.09) 11px); }
+.gn { background:#085041; } .glt { color:#085041; } .gls { color:#0F6E56; }
+.gc { background:#E0F5EE; border-color:#2A9073; } .gc .cb-lbl { color:#0F6E56; } .gc .cb-val { color:#085041; }
+
+/* Blue */
+.bv { background:#E5F1FC; border-color:#3A7DC4; }
+.bv .vb-lbl { color:#185FA5; } .bv .vb-num { color:#0C447C; } .bv .vb-sub { color:#185FA5; }
+.bl { background:#E5F1FC; border-color:#3A7DC4; background-image:repeating-linear-gradient(-45deg,transparent,transparent 9px,rgba(24,95,165,.09) 9px,rgba(24,95,165,.09) 11px); }
+.bn { background:#0C447C; } .blt { color:#0C447C; } .bls { color:#185FA5; }
+.bc { background:#E5F1FC; border-color:#3A7DC4; } .bc .cb-lbl { color:#185FA5; } .bc .cb-val { color:#0C447C; }
+
+/* Amber */
+.av { background:#FAF0DC; border-color:#C07A18; }
+.av .vb-lbl { color:#854F0B; } .av .vb-num { color:#633806; } .av .vb-sub { color:#854F0B; }
+.al { background:#FAF0DC; border-color:#C07A18; background-image:repeating-linear-gradient(-45deg,transparent,transparent 9px,rgba(133,79,11,.09) 9px,rgba(133,79,11,.09) 11px); }
+.an { background:#633806; } .alt { color:#633806; } .als { color:#854F0B; }
+.ab { background:#D08A20; color:#FFF8EE; }
+.ac { background:#FAF0DC; border-color:#C07A18; } .ac .cb-lbl { color:#854F0B; } .ac .cb-val { color:#633806; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="title">Camadas de proteção — do fornecedor à filial</p>
+
+  <div class="forn-wrap">
+    <div class="forn">Estoque do fornecedor</div>
+  </div>
+
+  <!-- SCATTER 0: 10 bolhas espalhadas + seta -->
+  <div class="scatter">
+    <svg viewBox="0 0 860 62" preserveAspectRatio="none">
+      <!-- bolhas com posições orgânicas, tamanhos variados -->
+      <circle cx="148" cy="18" r="5.5" fill="#C04828" opacity=".85"/>
+      <circle cx="210" cy="38" r="4"   fill="#9B6014" opacity=".75"/>
+      <circle cx="275" cy="14" r="7"   fill="#A85030" opacity=".8"/>
+      <circle cx="340" cy="44" r="4.5" fill="#CC7030" opacity=".7"/>
+      <circle cx="400" cy="22" r="6"   fill="#C04828" opacity=".6"/>
+      <circle cx="460" cy="42" r="4"   fill="#7A4018" opacity=".8"/>
+      <circle cx="520" cy="12" r="5"   fill="#9B6014" opacity=".7"/>
+      <circle cx="590" cy="36" r="7"   fill="#A04020" opacity=".75"/>
+      <circle cx="650" cy="20" r="4.5" fill="#CC6030" opacity=".65"/>
+      <circle cx="715" cy="46" r="5"   fill="#8B4513" opacity=".8"/>
+      <!-- seta centralizada -->
+      <line x1="430" y1="52" x2="430" y2="60" stroke="#AFADA4" stroke-width="1.8"/>
+      <path d="M426 56 L430 62 L434 56" fill="none" stroke="#AFADA4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+  <!-- L1 Purple -->
+  <div class="row">
+    <div class="vb pv">
+      <span class="vb-lbl">Valor NC</span>
+      <span class="vb-num vb-empty">— sem dados</span>
+    </div>
+    <div class="lb pl">
+      <div class="num pn">1</div>
+      <p class="lt plt">Validação pré-envio do fornecedor</p>
+      <p class="ls pls">Fotos dos itens conferidas por IA antes do despacho</p>
+    </div>
+    <div class="cb pc">
+      <p class="cb-lbl">O QUE CAPTURA</p>
+      <p class="cb-val">Defeitos antes do despacho</p>
+    </div>
+  </div>
+
+  <!-- SCATTER 1: 8 bolhas + seta -->
+  <div class="scatter">
+    <svg viewBox="0 0 860 62" preserveAspectRatio="none">
+      <circle cx="162" cy="34" r="4.5" fill="#C04828" opacity=".8"/>
+      <circle cx="238" cy="16" r="6"   fill="#9B6014" opacity=".7"/>
+      <circle cx="308" cy="44" r="4"   fill="#A85030" opacity=".75"/>
+      <circle cx="388" cy="20" r="5.5" fill="#CC7030" opacity=".65"/>
+      <circle cx="455" cy="40" r="4"   fill="#7A4018" opacity=".85"/>
+      <circle cx="534" cy="14" r="6.5" fill="#8B4513" opacity=".7"/>
+      <circle cx="608" cy="42" r="4.5" fill="#A04020" opacity=".8"/>
+      <circle cx="680" cy="24" r="5"   fill="#CC6030" opacity=".6"/>
+      <line x1="430" y1="52" x2="430" y2="60" stroke="#AFADA4" stroke-width="1.8"/>
+      <path d="M426 56 L430 62 L434 56" fill="none" stroke="#AFADA4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+  <!-- L2 Teal -->
+  <div class="row">
+    <div class="vb gv">
+      <span class="vb-lbl">Valor NC</span>
+      <span class="vb-num vb-empty">— sem dados</span>
+    </div>
+    <div class="lb gl">
+      <div class="num gn">2</div>
+      <p class="lt glt">Inspeção no recebimento (CDs)</p>
+      <p class="ls gls">Sistema de inspeção — avarias, divergências, lotes</p>
+    </div>
+    <div class="cb gc">
+      <p class="cb-lbl">O QUE CAPTURA</p>
+      <p class="cb-val">Avarias e divergências</p>
+    </div>
+  </div>
+
+  <!-- SCATTER 2: 6 bolhas + seta -->
+  <div class="scatter">
+    <svg viewBox="0 0 860 62" preserveAspectRatio="none">
+      <circle cx="190" cy="28" r="5"   fill="#C04828" opacity=".75"/>
+      <circle cx="290" cy="44" r="4.5" fill="#9B6014" opacity=".8"/>
+      <circle cx="375" cy="16" r="6"   fill="#A85030" opacity=".7"/>
+      <circle cx="468" cy="42" r="4"   fill="#7A4018" opacity=".75"/>
+      <circle cx="558" cy="20" r="5.5" fill="#CC7030" opacity=".65"/>
+      <circle cx="645" cy="38" r="4"   fill="#8B4513" opacity=".8"/>
+      <line x1="430" y1="52" x2="430" y2="60" stroke="#AFADA4" stroke-width="1.8"/>
+      <path d="M426 56 L430 62 L434 56" fill="none" stroke="#AFADA4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+  <!-- L3 Blue -->
+  <div class="row">
+    <div class="vb bv">
+      <span class="vb-lbl">Valor NC</span>
+      <span class="vb-num">R$ 42,56K</span>
+      <span class="vb-sub">2.319 itens NC<br>encontrados</span>
+    </div>
+    <div class="lb bl">
+      <div class="num bn">3</div>
+      <p class="lt blt">Inventário rotativo nos CDs</p>
+      <p class="ls bls">Vistoria semanal em peças problemáticas no estoque</p>
+    </div>
+    <div class="cb bc">
+      <p class="cb-lbl">O QUE CAPTURA</p>
+      <p class="cb-val">Problemas pós-recebimento</p>
+    </div>
+  </div>
+
+  <!-- SCATTER 3: 4 bolhas + seta -->
+  <div class="scatter">
+    <svg viewBox="0 0 860 62" preserveAspectRatio="none">
+      <circle cx="240" cy="36" r="5"   fill="#C04828" opacity=".8"/>
+      <circle cx="378" cy="18" r="4.5" fill="#9B6014" opacity=".7"/>
+      <circle cx="498" cy="44" r="5.5" fill="#A85030" opacity=".75"/>
+      <circle cx="622" cy="22" r="4"   fill="#7A4018" opacity=".8"/>
+      <line x1="430" y1="52" x2="430" y2="60" stroke="#AFADA4" stroke-width="1.8"/>
+      <path d="M426 56 L430 62 L434 56" fill="none" stroke="#AFADA4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+  <!-- L4 Amber -->
+  <div class="row">
+    <div class="vb av">
+      <span class="vb-lbl">Valor descartado</span>
+      <span class="vb-num">R$ 60,65K</span>
+      <span class="vb-sub">1.416 refugos</span>
+    </div>
+    <div class="lb al">
+      <div class="num an">4</div>
+      <p class="lt alt">AI Agent nas filiais <span class="badge ab">último recurso</span></p>
+      <p class="ls als">Coleta de evidências + abertura automática de claim</p>
+    </div>
+    <div class="cb ac">
+      <p class="cb-lbl">O QUE CAPTURA</p>
+      <p class="cb-val">Nenhuma perda sem claim</p>
+    </div>
+  </div>
+
+  <!-- seta final -->
+  <div class="arrow-wrap">
+    <svg width="14" height="30" viewBox="0 0 14 30">
+      <line x1="7" y1="0" x2="7" y2="22" stroke="#AFADA4" stroke-width="1.8"/>
+      <path d="M3 17 L7 24 L11 17" fill="none" stroke="#AFADA4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+  <div class="fin-wrap">
+    <div class="fin">Claim submetida — portal TVS</div>
+  </div>
+
+  <div class="bottom">
+    <div class="total-chips">
+      <div class="chip">
+        <div class="chip-lbl">Total NC identificado (L3 + L4)</div>
+        <div class="chip-val">R$ 103.213,28</div>
+      </div>
+      <div class="chip">
+        <div class="chip-lbl">L1 + L2</div>
+        <div class="chip-val">Sem dados ainda</div>
+      </div>
+    </div>
+    <p class="footer">Quanto mais cedo capturado, mais forte a evidência e maior a chance de aprovação</p>
+  </div>
+
+</div>
+</body>
+</html>
