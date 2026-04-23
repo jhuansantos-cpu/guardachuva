@@ -2,360 +2,725 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Camadas de Proteção — Procurement</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
 <style>
+:root {
+  --green:       #4FAE45;
+  --green-dark:  #2E7D32;
+  --green-text:  #1B5E20;
+
+  --black:   #1A1A1A;
+  --gray-80: #333333;
+  --gray-60: #666666;
+  --gray-40: #999999;
+  --gray-20: #CCCCCC;
+  --gray-10: #E8E8E8;
+  --gray-05: #F5F5F5;
+  --white:   #FFFFFF;
+
+  /* Camadas — mesmo verde, opacidade crescente pelo volume descartado
+     L1 sem dado → mais transparente
+     L2 sem dado → um pouco mais
+     L3 R$42K    → médio
+     L4 R$60K    → mais sólido (maior volume)
+  */
+  --l1-bg:  rgba(79,174,69,.05);  --l1-bd: rgba(79,174,69,.22); --l1-num: rgba(79,174,69,.55);
+  --l2-bg:  rgba(79,174,69,.08);  --l2-bd: rgba(79,174,69,.32); --l2-num: rgba(79,174,69,.70);
+  --l3-bg:  rgba(79,174,69,.13);  --l3-bd: rgba(79,174,69,.55); --l3-num: #3A9934;
+  --l4-bg:  rgba(79,174,69,.20);  --l4-bd: rgba(79,174,69,.85); --l4-num: #2E7D32;
+
+  --radius: 6px;
+}
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-  background: #F5F3EE;
-  padding: 44px 36px 52px;
+  font-family: 'Poppins', -apple-system, sans-serif;
+  background: var(--gray-05);
+  color: var(--black);
+  min-height: 100vh;
 }
 
-.wrap { width: 860px; margin: 0 auto; }
-
-.title {
-  text-align: center;
+/* ── TOP BAR ── */
+.topbar {
+  background: var(--white);
+  border-bottom: 1px solid var(--gray-10);
+  padding: 0 28px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.topbar-title {
+  font-family: 'Barlow', sans-serif;
   font-size: 15px;
   font-weight: 700;
-  color: #1E1D1A;
-  margin-bottom: 24px;
+  color: var(--black);
   letter-spacing: -0.01em;
 }
+.topbar-sep { width: 1px; height: 16px; background: var(--gray-20); }
+.topbar-sub {
+  font-size: 12px;
+  color: var(--gray-40);
+  font-weight: 400;
+}
+.topbar-badge {
+  margin-left: auto;
+  background: var(--gray-05);
+  border: 1px solid var(--gray-10);
+  border-radius: 4px;
+  padding: 3px 10px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--gray-40);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
 
-/* ── Fornecedor ── */
-.forn-wrap { display: flex; justify-content: center; }
-.forn {
-  background: #E8E6DF;
-  border: 1.5px solid #C5C2B8;
-  border-radius: 12px;
-  padding: 14px 48px;
-  font-size: 15px;
+/* ── PAGE ── */
+.page { max-width: 860px; margin: 0 auto; padding: 32px 20px 56px; }
+
+/* ── SUPPLIER / FINAL ── */
+.node-wrap { display: flex; justify-content: center; }
+.node {
+  background: var(--white);
+  border: 1px solid var(--gray-20);
+  border-radius: var(--radius);
+  padding: 11px 40px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px;
   font-weight: 600;
-  color: #2C2A26;
+  color: var(--gray-60);
+}
+.node-final {
+  background: var(--white);
+  border-color: var(--green);
+  color: var(--green-dark);
+  font-weight: 700;
 }
 
-/* ── Scatter zone ── */
-.scatter {
-  position: relative;
-  width: 100%;
-  height: 62px;
-  margin: 0;
-}
-.scatter svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: visible; }
+/* ── SCATTER ── */
+.scatter { position: relative; width: 100%; height: 52px; }
+.scatter svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 
-/* ── Row ── */
-.row {
-  display: flex;
-  align-items: stretch;
-  gap: 10px;
-}
+/* ── ROW ── */
+.row { display: flex; align-items: stretch; gap: 8px; }
 
-/* ── Value box ── */
+/* ── VALUE BOX ── */
 .vb {
-  width: 122px;
+  width: 120px;
   flex-shrink: 0;
-  border-radius: 12px;
-  padding: 14px 14px;
+  border-radius: var(--radius);
+  padding: 12px 13px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 4px;
-  border-width: 1.5px;
-  border-style: solid;
+  gap: 3px;
+  border: 1px solid var(--gray-20);
+  background: var(--white);
 }
+.vb.clickable { cursor: pointer; transition: border-color .15s, box-shadow .15s; }
+.vb.clickable:hover { border-color: var(--green); box-shadow: 0 0 0 3px rgba(79,174,69,.12); }
 .vb-lbl {
-  font-size: 9px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 8px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .09em;
+  color: var(--gray-40);
 }
 .vb-num {
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 1.1;
+  font-family: 'Barlow', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.15;
   letter-spacing: -0.02em;
+  color: var(--green-text);
 }
 .vb-sub {
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 500;
+  color: var(--gray-40);
   line-height: 1.35;
-  opacity: .85;
 }
 .vb-empty {
   font-size: 11px;
-  font-weight: 400;
   font-style: italic;
-  opacity: .5;
+  color: var(--gray-20);
+  font-weight: 400;
 }
 
-/* ── Layer box ── */
+/* ── LAYER CLICKABLE ── */
+.layer-clickable {
+  flex: 1; display: flex; gap: 8px;
+  cursor: pointer;
+  transition: transform .12s;
+}
+.layer-clickable:hover { transform: translateX(-2px); }
+.layer-clickable:hover .lb,
+.layer-clickable:hover .cb { border-color: var(--green); }
+
+/* ── LAYER BOX ── */
 .lb {
   flex: 1;
-  border-radius: 12px;
-  padding: 16px 16px 16px 54px;
+  border-radius: var(--radius);
+  padding: 14px 36px 14px 50px;
   position: relative;
-  border-width: 1.5px;
-  border-style: solid;
+  border: 1px solid transparent;
+  transition: border-color .15s;
 }
-.num {
-  position: absolute;
-  left: 14px;
-  top: 50%;
+.lb-num {
+  position: absolute; left: 13px; top: 50%;
   transform: translateY(-50%);
-  width: 28px; height: 28px;
+  width: 26px; height: 26px;
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  font-size: 14px; font-weight: 700; color: #fff;
+  font-family: 'Barlow', sans-serif;
+  font-size: 12px; font-weight: 800;
+  color: var(--white);
 }
-.lt { font-size: 14px; font-weight: 700; margin-bottom: 4px; line-height: 1.3; letter-spacing: -0.01em; }
-.ls { font-size: 12px; font-weight: 400; line-height: 1.4; }
-.badge {
-  display: inline-block; font-size: 10px; padding: 2px 10px;
-  border-radius: 20px; font-weight: 600; vertical-align: middle; margin-left: 8px;
-}
-
-/* ── Cap box ── */
-.cb {
-  width: 185px;
-  flex-shrink: 0;
-  border-radius: 12px;
-  padding: 14px 16px;
-  border-width: 1.5px; border-style: solid;
-  display: flex; flex-direction: column; justify-content: center; gap: 7px;
-}
-.cb-lbl { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .09em; }
-.cb-val { font-size: 14px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
-
-/* ── Arrow only ── */
-.arrow-wrap {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 28px;
-}
-
-/* ── Final ── */
-.fin-wrap { display: flex; justify-content: center; }
-.fin {
-  background: #EBF4DC;
-  border: 2px solid #4A8220;
-  border-radius: 12px;
-  padding: 16px 52px;
-  font-size: 15px; font-weight: 700; color: #2A5810;
+.lb-title {
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 3px;
   letter-spacing: -0.01em;
+  color: var(--black);
+}
+.lb-sub { font-size: 11px; font-weight: 400; color: var(--gray-60); line-height: 1.4; }
+.lb-chev {
+  position: absolute; right: 10px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px !important;
+  color: var(--gray-20);
+}
+.badge {
+  display: inline-block;
+  font-family: 'Barlow', sans-serif;
+  font-size: 9px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .06em;
+  padding: 2px 7px; border-radius: 3px;
+  vertical-align: middle; margin-left: 6px;
+  background: rgba(79,174,69,.15);
+  color: var(--green-dark);
+  border: 1px solid rgba(79,174,69,.3);
 }
 
-/* ── Bottom ── */
-.bottom { margin-top: 20px; }
-.total-chips {
-  display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 12px;
+/* ── CAP BOX ── */
+.cb {
+  width: 172px; flex-shrink: 0;
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  border: 1px solid transparent;
+  display: flex; flex-direction: column; justify-content: center; gap: 4px;
+  transition: border-color .15s;
 }
+.cb-lbl {
+  font-family: 'Barlow', sans-serif;
+  font-size: 8px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .09em;
+  color: var(--gray-40);
+}
+.cb-val {
+  font-family: 'Barlow', sans-serif;
+  font-size: 12px; font-weight: 700;
+  color: var(--black);
+  line-height: 1.3;
+}
+
+/* ── LAYER THEMES — verde com opacidade crescente ── */
+.l1 .lb { background: var(--l1-bg); border-color: var(--l1-bd); }
+.l1 .lb-num { background: var(--l1-num); }
+.l1 .cb { background: var(--l1-bg); border-color: var(--l1-bd); }
+
+.l2 .lb { background: var(--l2-bg); border-color: var(--l2-bd); }
+.l2 .lb-num { background: var(--l2-num); }
+.l2 .cb { background: var(--l2-bg); border-color: var(--l2-bd); }
+
+.l3 .lb { background: var(--l3-bg); border-color: var(--l3-bd); }
+.l3 .lb-num { background: var(--l3-num); }
+.l3 .cb { background: var(--l3-bg); border-color: var(--l3-bd); }
+
+.l4 .lb { background: var(--l4-bg); border-color: var(--l4-bd); }
+.l4 .lb-num { background: var(--l4-num); }
+.l4 .cb { background: var(--l4-bg); border-color: var(--l4-bd); }
+
+/* hover override para manter intensidade certa */
+.l1 .layer-clickable:hover .lb,
+.l1 .layer-clickable:hover .cb { border-color: var(--green); }
+.l2 .layer-clickable:hover .lb,
+.l2 .layer-clickable:hover .cb { border-color: var(--green); }
+.l3 .layer-clickable:hover .lb,
+.l3 .layer-clickable:hover .cb { border-color: var(--green-dark); }
+.l4 .layer-clickable:hover .lb,
+.l4 .layer-clickable:hover .cb { border-color: var(--green-dark); }
+
+/* ── ARROW ── */
+.arrow-wrap { display: flex; justify-content: center; align-items: center; height: 22px; }
+
+/* ── BOTTOM ── */
+.bottom { margin-top: 22px; }
+.chips { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
 .chip {
-  background: #ECEAE3; border: 1px solid #C8C5BB; border-radius: 8px;
-  padding: 9px 20px; text-align: center;
+  background: var(--white);
+  border: 1px solid var(--gray-10);
+  border-radius: var(--radius);
+  padding: 9px 18px;
+  text-align: center;
 }
-.chip-lbl { font-size: 9px; font-weight: 700; color: #888680; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 2px; }
-.chip-val { font-size: 15px; font-weight: 700; color: #1E1D1A; letter-spacing: -0.01em; }
-.footer { font-size: 11px; color: #9B998F; text-align: center; line-height: 1.6; }
+.chip-lbl {
+  font-family: 'Barlow', sans-serif;
+  font-size: 8px; font-weight: 700;
+  color: var(--gray-40);
+  text-transform: uppercase; letter-spacing: .08em;
+  margin-bottom: 3px;
+}
+.chip-val {
+  font-family: 'Barlow', sans-serif;
+  font-size: 15px; font-weight: 800;
+  color: var(--black); letter-spacing: -0.02em;
+}
+.chip-total { border-color: rgba(79,174,69,.4); }
+.chip-total .chip-val { color: var(--green-text); }
 
-/* ══ COLOR THEMES ══ */
-/* Purple */
-.pv { background:#EEEDFE; border-color:#7B72D8; }
-.pv .vb-lbl { color:#534AB7; } .pv .vb-num { color:#3C3489; } .pv .vb-sub { color:#534AB7; }
-.pl { background:#EEEDFE; border-color:#7B72D8; background-image:repeating-linear-gradient(-45deg,transparent,transparent 9px,rgba(83,74,183,.09) 9px,rgba(83,74,183,.09) 11px); }
-.pn { background:#3C3489; } .plt { color:#3C3489; } .pls { color:#534AB7; }
-.pc { background:#EEEDFE; border-color:#7B72D8; } .pc .cb-lbl { color:#534AB7; } .pc .cb-val { color:#3C3489; }
+.footer-txt { text-align: center; font-size: 11px; color: var(--gray-40); line-height: 1.6; }
+.updated { text-align: center; font-size: 10px; color: var(--gray-20); margin-top: 4px; }
 
-/* Teal */
-.gv { background:#E0F5EE; border-color:#2A9073; }
-.gv .vb-lbl { color:#0F6E56; } .gv .vb-num { color:#085041; } .gv .vb-sub { color:#0F6E56; }
-.gl { background:#E0F5EE; border-color:#2A9073; background-image:repeating-linear-gradient(-45deg,transparent,transparent 9px,rgba(15,110,86,.09) 9px,rgba(15,110,86,.09) 11px); }
-.gn { background:#085041; } .glt { color:#085041; } .gls { color:#0F6E56; }
-.gc { background:#E0F5EE; border-color:#2A9073; } .gc .cb-lbl { color:#0F6E56; } .gc .cb-val { color:#085041; }
+/* ══ DRAWER ══ */
+.overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.35);
+  z-index: 100;
+  opacity: 0; pointer-events: none;
+  transition: opacity .22s;
+}
+.overlay.open { opacity: 1; pointer-events: all; }
 
-/* Blue */
-.bv { background:#E5F1FC; border-color:#3A7DC4; }
-.bv .vb-lbl { color:#185FA5; } .bv .vb-num { color:#0C447C; } .bv .vb-sub { color:#185FA5; }
-.bl { background:#E5F1FC; border-color:#3A7DC4; background-image:repeating-linear-gradient(-45deg,transparent,transparent 9px,rgba(24,95,165,.09) 9px,rgba(24,95,165,.09) 11px); }
-.bn { background:#0C447C; } .blt { color:#0C447C; } .bls { color:#185FA5; }
-.bc { background:#E5F1FC; border-color:#3A7DC4; } .bc .cb-lbl { color:#185FA5; } .bc .cb-val { color:#0C447C; }
+.drawer {
+  position: fixed; top: 0; right: 0; bottom: 0;
+  width: 450px;
+  background: var(--white);
+  border-left: 1px solid var(--gray-10);
+  z-index: 101;
+  transform: translateX(100%);
+  transition: transform .28s cubic-bezier(.4,0,.2,1);
+  display: flex; flex-direction: column;
+}
+.drawer.open { transform: translateX(0); }
 
-/* Amber */
-.av { background:#FAF0DC; border-color:#C07A18; }
-.av .vb-lbl { color:#854F0B; } .av .vb-num { color:#633806; } .av .vb-sub { color:#854F0B; }
-.al { background:#FAF0DC; border-color:#C07A18; background-image:repeating-linear-gradient(-45deg,transparent,transparent 9px,rgba(133,79,11,.09) 9px,rgba(133,79,11,.09) 11px); }
-.an { background:#633806; } .alt { color:#633806; } .als { color:#854F0B; }
-.ab { background:#D08A20; color:#FFF8EE; }
-.ac { background:#FAF0DC; border-color:#C07A18; } .ac .cb-lbl { color:#854F0B; } .ac .cb-val { color:#633806; }
+.drawer-header {
+  height: 52px;
+  padding: 0 18px;
+  border-bottom: 1px solid var(--gray-10);
+  display: flex; align-items: center; gap: 10px;
+  flex-shrink: 0;
+}
+.d-num {
+  width: 28px; height: 28px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px; font-weight: 800;
+  color: var(--white); flex-shrink: 0;
+}
+.d-info { flex: 1; min-width: 0; }
+.d-title {
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px; font-weight: 700;
+  color: var(--black);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.d-pill {
+  font-family: 'Barlow', sans-serif;
+  font-size: 9px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .07em;
+  color: var(--green-dark);
+  background: rgba(79,174,69,.1);
+  border: 1px solid rgba(79,174,69,.25);
+  border-radius: 3px;
+  padding: 2px 7px;
+  display: inline-block; margin-top: 1px;
+}
+.d-close {
+  background: none; border: 1px solid var(--gray-10);
+  border-radius: var(--radius);
+  width: 30px; height: 30px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--gray-40);
+  transition: background .12s, border-color .12s;
+}
+.d-close:hover { background: var(--gray-05); border-color: var(--gray-20); color: var(--black); }
+.d-close .material-icons-round { font-size: 16px; }
+
+.d-body {
+  flex: 1; overflow-y: auto;
+  padding: 18px 18px 28px;
+  display: flex; flex-direction: column; gap: 18px;
+}
+
+/* Drawer internals */
+.d-sec { font-family: 'Barlow', sans-serif; font-size: 8px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .1em; color: var(--gray-40); margin-bottom: 7px; }
+
+.kpi-row { display: flex; gap: 7px; }
+.kpi { flex: 1; background: var(--gray-05); border: 1px solid var(--gray-10);
+  border-radius: var(--radius); padding: 11px 12px; }
+.kpi-lbl { font-family: 'Barlow', sans-serif; font-size: 8px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .08em; color: var(--gray-40); margin-bottom: 3px; }
+.kpi-val { font-family: 'Barlow', sans-serif; font-size: 18px; font-weight: 800;
+  letter-spacing: -0.02em; color: var(--green-text); }
+.kpi-hint { font-size: 10px; color: var(--gray-40); margin-top: 1px; }
+
+.d-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.d-table th { text-align: left; font-family: 'Barlow', sans-serif; font-size: 8px;
+  font-weight: 700; text-transform: uppercase; letter-spacing: .08em;
+  color: var(--gray-40); padding: 0 7px 7px; border-bottom: 1px solid var(--gray-10); }
+.d-table th:not(:first-child) { text-align: right; }
+.d-table td { padding: 8px 7px; border-bottom: 1px solid var(--gray-05);
+  color: var(--gray-80); vertical-align: middle; }
+.d-table td:not(:first-child) { text-align: right; font-weight: 600; color: var(--black); }
+.d-table tr:last-child td { border-bottom: none; }
+.d-table tr:hover td { background: var(--gray-05); }
+
+.bar-wrap { height: 3px; background: var(--gray-10); border-radius: 2px; margin-top: 5px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 2px; background: var(--green); }
+.bar-red { background: #EF5350; }
+.bar-amber { background: #FFA726; }
+
+.cd { display: inline-block; font-family: 'Barlow', sans-serif; font-size: 9px;
+  font-weight: 700; padding: 1px 5px; border-radius: 3px; margin-right: 2px; }
+.cd-pe { background: #FFEBEE; color: #C62828; }
+.cd-sc { background: rgba(79,174,69,.12); color: var(--green-dark); }
+.cd-sp { background: #E3F2FD; color: #1565C0; }
+
+.info-box { background: var(--gray-05); border: 1px solid var(--gray-10);
+  border-radius: var(--radius); padding: 12px 14px;
+  font-size: 12px; line-height: 1.7; color: var(--gray-60); }
+.info-box strong { color: var(--black); font-weight: 600; }
+
+.desc-card { background: var(--gray-05); border-left: 3px solid var(--green);
+  border-radius: 0 var(--radius) var(--radius) 0; padding: 12px 14px;
+  font-size: 12px; line-height: 1.75; color: var(--gray-60); }
+.desc-card strong { font-family: 'Barlow', sans-serif; font-size: 13px; font-weight: 700;
+  color: var(--black); display: block; margin-bottom: 4px; }
+
+.coming { text-align: center; padding: 28px 12px; color: var(--gray-20); font-size: 12px; }
+.coming .material-icons-round { font-size: 32px !important; display: block;
+  margin: 0 auto 8px; color: var(--gray-10); }
 </style>
 </head>
 <body>
-<div class="wrap">
 
-  <p class="title">Camadas de proteção — do fornecedor à filial</p>
+<!-- ── TOP BAR ── -->
+<header class="topbar">
+  <span class="topbar-title">Camadas de Proteção de Qualidade</span>
+  <div class="topbar-sep"></div>
+  <span class="topbar-sub">Procurement &amp; Supply</span>
+  <span class="topbar-badge">Quality Shield</span>
+</header>
 
-  <div class="forn-wrap">
-    <div class="forn">Estoque do fornecedor</div>
+<!-- ── OVERLAY / DRAWER ── -->
+<div class="overlay" id="overlay" onclick="closeDrawer()"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-header">
+    <div class="d-num" id="d-num"></div>
+    <div class="d-info">
+      <div class="d-title" id="d-title"></div>
+      <div class="d-pill" id="d-pill"></div>
+    </div>
+    <button class="d-close" onclick="closeDrawer()">
+      <span class="material-icons-round">close</span>
+    </button>
+  </div>
+  <div class="d-body" id="d-body"></div>
+</div>
+
+<!-- ── MAIN ── -->
+<main class="page">
+
+  <div class="node-wrap"><div class="node">Estoque do fornecedor</div></div>
+
+  <!-- scatter 0 — 10 dots -->
+  <div class="scatter"><svg viewBox="0 0 860 52" preserveAspectRatio="none">
+    <circle cx="138" cy="15" r="5"   fill="#C04828" opacity=".8"/>
+    <circle cx="204" cy="34" r="3.5" fill="#9B6014" opacity=".65"/>
+    <circle cx="268" cy="11" r="6.5" fill="#A85030" opacity=".75"/>
+    <circle cx="338" cy="40" r="4"   fill="#CC7030" opacity=".6"/>
+    <circle cx="398" cy="19" r="5.5" fill="#C04828" opacity=".5"/>
+    <circle cx="456" cy="38" r="3.5" fill="#7A4018" opacity=".7"/>
+    <circle cx="516" cy="10" r="4.5" fill="#9B6014" opacity=".6"/>
+    <circle cx="584" cy="32" r="6.5" fill="#A04020" opacity=".65"/>
+    <circle cx="644" cy="17" r="4"   fill="#CC6030" opacity=".55"/>
+    <circle cx="706" cy="42" r="4.5" fill="#8B4513" opacity=".7"/>
+    <line x1="430" y1="46" x2="430" y2="51" stroke="#CCCCCC" stroke-width="1.4"/>
+    <path d="M427 48 L430 52 L433 48" fill="none" stroke="#CCCCCC" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg></div>
+
+  <!-- L1 -->
+  <div class="row l1">
+    <div class="vb"><span class="vb-lbl">Valor NC</span><span class="vb-num vb-empty">— sem dados</span></div>
+    <div class="layer-clickable" onclick="openDrawer(1,'desc')">
+      <div class="lb"><div class="lb-num">1</div>
+        <p class="lb-title">Validação pré-envio do fornecedor</p>
+        <p class="lb-sub">Fotos dos itens conferidas por IA antes do despacho</p>
+        <span class="material-icons-round lb-chev">chevron_right</span>
+      </div>
+      <div class="cb"><p class="cb-lbl">O QUE CAPTURA</p><p class="cb-val">Defeitos antes do despacho</p></div>
+    </div>
   </div>
 
-  <!-- SCATTER 0: 10 bolhas espalhadas + seta -->
-  <div class="scatter">
-    <svg viewBox="0 0 860 62" preserveAspectRatio="none">
-      <!-- bolhas com posições orgânicas, tamanhos variados -->
-      <circle cx="148" cy="18" r="5.5" fill="#C04828" opacity=".85"/>
-      <circle cx="210" cy="38" r="4"   fill="#9B6014" opacity=".75"/>
-      <circle cx="275" cy="14" r="7"   fill="#A85030" opacity=".8"/>
-      <circle cx="340" cy="44" r="4.5" fill="#CC7030" opacity=".7"/>
-      <circle cx="400" cy="22" r="6"   fill="#C04828" opacity=".6"/>
-      <circle cx="460" cy="42" r="4"   fill="#7A4018" opacity=".8"/>
-      <circle cx="520" cy="12" r="5"   fill="#9B6014" opacity=".7"/>
-      <circle cx="590" cy="36" r="7"   fill="#A04020" opacity=".75"/>
-      <circle cx="650" cy="20" r="4.5" fill="#CC6030" opacity=".65"/>
-      <circle cx="715" cy="46" r="5"   fill="#8B4513" opacity=".8"/>
-      <!-- seta centralizada -->
-      <line x1="430" y1="52" x2="430" y2="60" stroke="#AFADA4" stroke-width="1.8"/>
-      <path d="M426 56 L430 62 L434 56" fill="none" stroke="#AFADA4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
+  <!-- scatter 1 — 8 dots -->
+  <div class="scatter"><svg viewBox="0 0 860 52" preserveAspectRatio="none">
+    <circle cx="156" cy="30" r="4"   fill="#C04828" opacity=".7"/>
+    <circle cx="232" cy="12" r="5.5" fill="#9B6014" opacity=".6"/>
+    <circle cx="304" cy="40" r="3.5" fill="#A85030" opacity=".65"/>
+    <circle cx="384" cy="16" r="5"   fill="#CC7030" opacity=".55"/>
+    <circle cx="450" cy="36" r="3.5" fill="#7A4018" opacity=".75"/>
+    <circle cx="530" cy="10" r="6"   fill="#8B4513" opacity=".6"/>
+    <circle cx="606" cy="38" r="4"   fill="#A04020" opacity=".7"/>
+    <circle cx="676" cy="20" r="4.5" fill="#CC6030" opacity=".5"/>
+    <line x1="430" y1="46" x2="430" y2="51" stroke="#CCCCCC" stroke-width="1.4"/>
+    <path d="M427 48 L430 52 L433 48" fill="none" stroke="#CCCCCC" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg></div>
+
+  <!-- L2 -->
+  <div class="row l2">
+    <div class="vb"><span class="vb-lbl">Valor NC</span><span class="vb-num vb-empty">— sem dados</span></div>
+    <div class="layer-clickable" onclick="openDrawer(2,'desc')">
+      <div class="lb"><div class="lb-num">2</div>
+        <p class="lb-title">Inspeção no recebimento (CDs)</p>
+        <p class="lb-sub">Sistema de inspeção — avarias, divergências, lotes</p>
+        <span class="material-icons-round lb-chev">chevron_right</span>
+      </div>
+      <div class="cb"><p class="cb-lbl">O QUE CAPTURA</p><p class="cb-val">Avarias e divergências</p></div>
+    </div>
   </div>
 
-  <!-- L1 Purple -->
-  <div class="row">
-    <div class="vb pv">
+  <!-- scatter 2 — 6 dots -->
+  <div class="scatter"><svg viewBox="0 0 860 52" preserveAspectRatio="none">
+    <circle cx="184" cy="24" r="4.5" fill="#C04828" opacity=".65"/>
+    <circle cx="286" cy="40" r="4"   fill="#9B6014" opacity=".7"/>
+    <circle cx="372" cy="12" r="5.5" fill="#A85030" opacity=".6"/>
+    <circle cx="466" cy="38" r="3.5" fill="#7A4018" opacity=".65"/>
+    <circle cx="554" cy="16" r="5"   fill="#CC7030" opacity=".55"/>
+    <circle cx="642" cy="34" r="3.5" fill="#8B4513" opacity=".7"/>
+    <line x1="430" y1="46" x2="430" y2="51" stroke="#CCCCCC" stroke-width="1.4"/>
+    <path d="M427 48 L430 52 L433 48" fill="none" stroke="#CCCCCC" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg></div>
+
+  <!-- L3 -->
+  <div class="row l3">
+    <div class="vb clickable" onclick="openDrawer(3,'values')">
       <span class="vb-lbl">Valor NC</span>
-      <span class="vb-num vb-empty">— sem dados</span>
+      <span class="vb-num" id="vb-l3-num">R$ 42,56K</span>
+      <span class="vb-sub" id="vb-l3-sub">2.319 itens NC</span>
     </div>
-    <div class="lb pl">
-      <div class="num pn">1</div>
-      <p class="lt plt">Validação pré-envio do fornecedor</p>
-      <p class="ls pls">Fotos dos itens conferidas por IA antes do despacho</p>
-    </div>
-    <div class="cb pc">
-      <p class="cb-lbl">O QUE CAPTURA</p>
-      <p class="cb-val">Defeitos antes do despacho</p>
-    </div>
-  </div>
-
-  <!-- SCATTER 1: 8 bolhas + seta -->
-  <div class="scatter">
-    <svg viewBox="0 0 860 62" preserveAspectRatio="none">
-      <circle cx="162" cy="34" r="4.5" fill="#C04828" opacity=".8"/>
-      <circle cx="238" cy="16" r="6"   fill="#9B6014" opacity=".7"/>
-      <circle cx="308" cy="44" r="4"   fill="#A85030" opacity=".75"/>
-      <circle cx="388" cy="20" r="5.5" fill="#CC7030" opacity=".65"/>
-      <circle cx="455" cy="40" r="4"   fill="#7A4018" opacity=".85"/>
-      <circle cx="534" cy="14" r="6.5" fill="#8B4513" opacity=".7"/>
-      <circle cx="608" cy="42" r="4.5" fill="#A04020" opacity=".8"/>
-      <circle cx="680" cy="24" r="5"   fill="#CC6030" opacity=".6"/>
-      <line x1="430" y1="52" x2="430" y2="60" stroke="#AFADA4" stroke-width="1.8"/>
-      <path d="M426 56 L430 62 L434 56" fill="none" stroke="#AFADA4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </div>
-
-  <!-- L2 Teal -->
-  <div class="row">
-    <div class="vb gv">
-      <span class="vb-lbl">Valor NC</span>
-      <span class="vb-num vb-empty">— sem dados</span>
-    </div>
-    <div class="lb gl">
-      <div class="num gn">2</div>
-      <p class="lt glt">Inspeção no recebimento (CDs)</p>
-      <p class="ls gls">Sistema de inspeção — avarias, divergências, lotes</p>
-    </div>
-    <div class="cb gc">
-      <p class="cb-lbl">O QUE CAPTURA</p>
-      <p class="cb-val">Avarias e divergências</p>
+    <div class="layer-clickable" onclick="openDrawer(3,'desc')">
+      <div class="lb"><div class="lb-num">3</div>
+        <p class="lb-title">Inventário rotativo nos CDs</p>
+        <p class="lb-sub">Vistoria semanal em peças problemáticas no estoque</p>
+        <span class="material-icons-round lb-chev">chevron_right</span>
+      </div>
+      <div class="cb"><p class="cb-lbl">O QUE CAPTURA</p><p class="cb-val">Problemas pós-recebimento</p></div>
     </div>
   </div>
 
-  <!-- SCATTER 2: 6 bolhas + seta -->
-  <div class="scatter">
-    <svg viewBox="0 0 860 62" preserveAspectRatio="none">
-      <circle cx="190" cy="28" r="5"   fill="#C04828" opacity=".75"/>
-      <circle cx="290" cy="44" r="4.5" fill="#9B6014" opacity=".8"/>
-      <circle cx="375" cy="16" r="6"   fill="#A85030" opacity=".7"/>
-      <circle cx="468" cy="42" r="4"   fill="#7A4018" opacity=".75"/>
-      <circle cx="558" cy="20" r="5.5" fill="#CC7030" opacity=".65"/>
-      <circle cx="645" cy="38" r="4"   fill="#8B4513" opacity=".8"/>
-      <line x1="430" y1="52" x2="430" y2="60" stroke="#AFADA4" stroke-width="1.8"/>
-      <path d="M426 56 L430 62 L434 56" fill="none" stroke="#AFADA4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </div>
+  <!-- scatter 3 — 4 dots -->
+  <div class="scatter"><svg viewBox="0 0 860 52" preserveAspectRatio="none">
+    <circle cx="232" cy="32" r="4.5" fill="#C04828" opacity=".7"/>
+    <circle cx="376" cy="14" r="4"   fill="#9B6014" opacity=".6"/>
+    <circle cx="496" cy="40" r="5"   fill="#A85030" opacity=".65"/>
+    <circle cx="620" cy="18" r="3.5" fill="#7A4018" opacity=".7"/>
+    <line x1="430" y1="46" x2="430" y2="51" stroke="#CCCCCC" stroke-width="1.4"/>
+    <path d="M427 48 L430 52 L433 48" fill="none" stroke="#CCCCCC" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg></div>
 
-  <!-- L3 Blue -->
-  <div class="row">
-    <div class="vb bv">
-      <span class="vb-lbl">Valor NC</span>
-      <span class="vb-num">R$ 42,56K</span>
-      <span class="vb-sub">2.319 itens NC<br>encontrados</span>
-    </div>
-    <div class="lb bl">
-      <div class="num bn">3</div>
-      <p class="lt blt">Inventário rotativo nos CDs</p>
-      <p class="ls bls">Vistoria semanal em peças problemáticas no estoque</p>
-    </div>
-    <div class="cb bc">
-      <p class="cb-lbl">O QUE CAPTURA</p>
-      <p class="cb-val">Problemas pós-recebimento</p>
-    </div>
-  </div>
-
-  <!-- SCATTER 3: 4 bolhas + seta -->
-  <div class="scatter">
-    <svg viewBox="0 0 860 62" preserveAspectRatio="none">
-      <circle cx="240" cy="36" r="5"   fill="#C04828" opacity=".8"/>
-      <circle cx="378" cy="18" r="4.5" fill="#9B6014" opacity=".7"/>
-      <circle cx="498" cy="44" r="5.5" fill="#A85030" opacity=".75"/>
-      <circle cx="622" cy="22" r="4"   fill="#7A4018" opacity=".8"/>
-      <line x1="430" y1="52" x2="430" y2="60" stroke="#AFADA4" stroke-width="1.8"/>
-      <path d="M426 56 L430 62 L434 56" fill="none" stroke="#AFADA4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </div>
-
-  <!-- L4 Amber -->
-  <div class="row">
-    <div class="vb av">
+  <!-- L4 -->
+  <div class="row l4">
+    <div class="vb clickable" onclick="openDrawer(4,'values')">
       <span class="vb-lbl">Valor descartado</span>
-      <span class="vb-num">R$ 60,65K</span>
-      <span class="vb-sub">1.416 refugos</span>
+      <span class="vb-num" id="vb-l4-num">R$ 60,65K</span>
+      <span class="vb-sub" id="vb-l4-sub">1.416 refugos</span>
     </div>
-    <div class="lb al">
-      <div class="num an">4</div>
-      <p class="lt alt">AI Agent nas filiais <span class="badge ab">último recurso</span></p>
-      <p class="ls als">Coleta de evidências + abertura automática de claim</p>
-    </div>
-    <div class="cb ac">
-      <p class="cb-lbl">O QUE CAPTURA</p>
-      <p class="cb-val">Nenhuma perda sem claim</p>
+    <div class="layer-clickable" onclick="openDrawer(4,'desc')">
+      <div class="lb"><div class="lb-num">4</div>
+        <p class="lb-title">AI Agent nas filiais <span class="badge">último recurso</span></p>
+        <p class="lb-sub">Coleta de evidências + abertura automática de claim</p>
+        <span class="material-icons-round lb-chev">chevron_right</span>
+      </div>
+      <div class="cb"><p class="cb-lbl">O QUE CAPTURA</p><p class="cb-val">Nenhuma perda sem claim</p></div>
     </div>
   </div>
 
-  <!-- seta final -->
+  <!-- arrow final -->
   <div class="arrow-wrap">
-    <svg width="14" height="30" viewBox="0 0 14 30">
-      <line x1="7" y1="0" x2="7" y2="22" stroke="#AFADA4" stroke-width="1.8"/>
-      <path d="M3 17 L7 24 L11 17" fill="none" stroke="#AFADA4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <svg width="12" height="24" viewBox="0 0 12 24">
+      <line x1="6" y1="0" x2="6" y2="17" stroke="#CCCCCC" stroke-width="1.4"/>
+      <path d="M3 13 L6 18 L9 13" fill="none" stroke="#CCCCCC" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   </div>
 
-  <div class="fin-wrap">
-    <div class="fin">Claim submetida — portal TVS</div>
-  </div>
+  <div class="node-wrap"><div class="node node-final">Claim submetida — portal TVS</div></div>
 
   <div class="bottom">
-    <div class="total-chips">
-      <div class="chip">
+    <div class="chips">
+      <div class="chip chip-total">
         <div class="chip-lbl">Total NC identificado (L3 + L4)</div>
-        <div class="chip-val">R$ 103.213,28</div>
+        <div class="chip-val" id="chip-total">R$ 103.213,28</div>
       </div>
       <div class="chip">
         <div class="chip-lbl">L1 + L2</div>
         <div class="chip-val">Sem dados ainda</div>
       </div>
     </div>
-    <p class="footer">Quanto mais cedo capturado, mais forte a evidência e maior a chance de aprovação</p>
+    <p class="footer-txt">Quanto mais cedo capturado, mais forte a evidência e maior a chance de aprovação</p>
+    <p class="updated" id="badge-atualizado"></p>
   </div>
 
-</div>
+</main>
+
+<script>
+
+var TS = {
+  l3: {
+    label: 'Ajustes negativos nos CDs',
+    unit: 'itens',
+    note: 'Abr/26 parcial',
+    data: [
+      {m:'Jan/25',v:37737},{m:'Fev/25',v:82509},{m:'Mar/25',v:554147},
+      {m:'Abr/25',v:367173},{m:'Mai/25',v:82690},{m:'Jun/25',v:1102457},
+      {m:'Jul/25',v:64001},{m:'Ago/25',v:104250},{m:'Set/25',v:178792},
+      {m:'Out/25',v:307858},{m:'Nov/25',v:90875},{m:'Dez/25',v:291048},
+      {m:'Jan/26',v:167996},{m:'Fev/26',v:172775},{m:'Mar/26',v:184266},
+      {m:'Abr/26',v:22197,partial:true}
+    ]
+  },
+  l4: {
+    label: 'Peças descartadas nas filiais',
+    unit: 'pecas',
+    note: 'Abr/26 parcial',
+    data: [
+      {m:'Jul/25',v:48},{m:'Ago/25',v:242},{m:'Set/25',v:187},
+      {m:'Out/25',v:197},{m:'Nov/25',v:156},{m:'Dez/25',v:215},
+      {m:'Jan/26',v:267},{m:'Fev/26',v:177},{m:'Mar/26',v:134},
+      {m:'Abr/26',v:77,partial:true}
+    ]
+  }
+};
+function fmtN(v){if(v>=1000000)return(v/1000000).toFixed(1)+'M';if(v>=1000)return(v/1000).toFixed(0)+'K';return v;}
+function renderChart(ts){
+  var W=410,H=130,PL=36,PR=8,PT=10,PB=28;
+  var cW=W-PL-PR,cH=H-PT-PB;
+  var data=ts.data,n=data.length;
+  var maxV=Math.max.apply(null,data.map(function(d){return d.v;}));
+  var gap=cW/n,bW=Math.max(4,Math.floor(gap*0.6));
+  var out='<div style="margin-bottom:4px"><span style="font-family:Barlow,sans-serif;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:#999">'+ts.label+'</span><span style="float:right;font-family:Barlow,sans-serif;font-size:8px;color:#bbb">'+ts.note+'</span></div>';
+  var svg='<svg width="100%" viewBox="0 0 '+W+' '+H+'" style="display:block;overflow:visible">';
+  for(var g=1;g<=3;g++){var yg=PT+cH*(1-g/3);svg+='<line x1="'+PL+'" y1="'+yg+'" x2="'+(W-PR)+'" y2="'+yg+'" stroke="#EEEEEE" stroke-width="1"/><text x="'+(PL-4)+'" y="'+(yg+3)+'" text-anchor="end" font-size="8" fill="#BBBBBB">'+fmtN(Math.round(maxV*g/3))+'</text>';}
+  var tpts=[];
+  for(var i=0;i<n;i++){
+    var d=data[i];
+    var bH=Math.max(2,Math.round((d.v/maxV)*cH));
+    var x=PL+i*gap+(gap-bW)/2,y=PT+cH-bH;
+    var col=d.partial?'rgba(79,174,69,.3)':'#4FAE45';
+    svg+='<rect x="'+x+'" y="'+y+'" width="'+bW+'" height="'+bH+'" rx="2" fill="'+col+'"><title>'+d.m+': '+d.v.toLocaleString('pt-BR')+' '+ts.unit+'</title></rect>';
+    var step=n>12?3:n>8?2:1;
+    if(i%step===0||i===n-1)svg+='<text x="'+(x+bW/2)+'" y="'+(H-PB+12)+'" text-anchor="middle" font-size="7.5" fill="#BBBBBB">'+d.m+'</text>';
+    tpts.push({x:x+bW/2,y:PT+cH-(d.v/maxV)*cH});
+  }
+  if(tpts.length>2){var tp='M';for(var i=0;i<tpts.length;i++)tp+=(i?'L':'')+tpts[i].x+' '+tpts[i].y;svg+='<path d="'+tp+'" fill="none" stroke="rgba(79,174,69,.45)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="3,2"/>';}
+  svg+='</svg>';
+  return out+svg;
+}
+
+
+var TS = {
+  l3: { label:'Ajustes negativos nos CDs', unit:'itens', note:'Abr/26 parcial',
+    data:[{m:'Jan/25',v:37737},{m:'Fev/25',v:82509},{m:'Mar/25',v:554147},{m:'Abr/25',v:367173},{m:'Mai/25',v:82690},{m:'Jun/25',v:1102457},{m:'Jul/25',v:64001},{m:'Ago/25',v:104250},{m:'Set/25',v:178792},{m:'Out/25',v:307858},{m:'Nov/25',v:90875},{m:'Dez/25',v:291048},{m:'Jan/26',v:167996},{m:'Fev/26',v:172775},{m:'Mar/26',v:184266},{m:'Abr/26',v:22197,partial:true}]},
+  l4: { label:'Peças descartadas nas filiais', unit:'peças', note:'Abr/26 parcial',
+    data:[{m:'Jul/25',v:48},{m:'Ago/25',v:242},{m:'Set/25',v:187},{m:'Out/25',v:197},{m:'Nov/25',v:156},{m:'Dez/25',v:215},{m:'Jan/26',v:267},{m:'Fev/26',v:177},{m:'Mar/26',v:134},{m:'Abr/26',v:77,partial:true}]}
+};
+function fmtN(v){if(v>=1000000)return(v/1000000).toFixed(1)+'M';if(v>=1000)return(v/1000).toFixed(0)+'K';return String(v);}
+function renderChart(ts){
+  var W=410,H=130,PL=36,PR=8,PT=10,PB=28,cW=W-PL-PR,cH=H-PT-PB;
+  var data=ts.data,n=data.length,maxV=Math.max.apply(null,data.map(function(d){return d.v;}));
+  var gap=cW/n,bW=Math.max(4,Math.floor(gap*0.6));
+  var out='<div style="margin-bottom:4px"><span style="font-family:Barlow,sans-serif;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:#999">'+ts.label+'</span><span style="float:right;font-family:Barlow,sans-serif;font-size:8px;color:#bbb">'+ts.note+'</span></div>';
+  var svg='<svg width="100%" viewBox="0 0 '+W+' '+H+'" style="display:block;overflow:visible">';
+  for(var g=1;g<=3;g++){var yg=PT+cH*(1-g/3);svg+='<line x1="'+PL+'" y1="'+yg+'" x2="'+(W-PR)+'" y2="'+yg+'" stroke="#EEEEEE" stroke-width="1"/><text x="'+(PL-4)+'" y="'+(yg+3)+'" text-anchor="end" font-size="8" fill="#BBBBBB">'+fmtN(Math.round(maxV*g/3))+'</text>';}
+  var tpts=[];
+  for(var i=0;i<n;i++){
+    var d=data[i],bH=Math.max(2,Math.round((d.v/maxV)*cH)),x=PL+i*gap+(gap-bW)/2,y=PT+cH-bH;
+    var col=d.partial?'rgba(79,174,69,.3)':'#4FAE45';
+    svg+='<rect x="'+x+'" y="'+y+'" width="'+bW+'" height="'+bH+'" rx="2" fill="'+col+'"><title>'+d.m+': '+d.v.toLocaleString('pt-BR')+' '+ts.unit+'</title></rect>';
+    var step=n>12?3:n>8?2:1;
+    if(i%step===0||i===n-1)svg+='<text x="'+(x+bW/2)+'" y="'+(H-PB+12)+'" text-anchor="middle" font-size="7.5" fill="#BBBBBB">'+d.m+'</text>';
+    tpts.push([x+bW/2,PT+cH-(d.v/maxV)*cH]);
+  }
+  if(tpts.length>2){var tp='';for(var i=0;i<tpts.length;i++)tp+=(i?'L':'M')+tpts[i][0]+' '+tpts[i][1];svg+='<path d="'+tp+'" fill="none" stroke="rgba(79,174,69,.45)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="3,2"/>';}
+  return out+svg+'</svg>';
+}
+
+var DATA = {
+  1:{bg:'rgba(79,174,69,.55)',t:'Validação pré-envio do fornecedor',values:null,
+    desc:`<div><div class="d-sec">O que captura</div><div class="desc-card"><strong>Defeitos antes do despacho</strong>Primeira linha de defesa: defeitos são identificados antes que a peça saia do fornecedor, evitando frete, trânsito e retrabalho no CD.</div></div><div><div class="d-sec">Como funciona</div><div class="desc-card"><strong>Inspeção por IA na origem</strong>Fotos enviadas pelo fornecedor são analisadas por um modelo de visão computacional — defeitos visíveis, divergências de código e problemas de embalagem. Só libera se aprovado.</div></div><div><div class="d-sec">Por que importa</div><div class="desc-card"><strong>Quanto mais cedo, maior o saving</strong>Peça barrada na origem custa apenas o custo de inspeção. A mesma peça na filial gera frete, armazenagem, mão de obra e claim.</div></div><div class="coming"><span class="material-icons-round">schedule</span>Dados em construção</div>`
+  },
+  2:{bg:'rgba(79,174,69,.70)',t:'Inspeção no recebimento (CDs)',values:null,
+    desc:`<div><div class="d-sec">O que captura</div><div class="desc-card"><strong>Avarias e divergências na entrada</strong>Peças com dano físico, código incorreto ou divergência de quantidade são bloqueadas no recebimento, antes de entrar no estoque ativo.</div></div><div><div class="d-sec">Como funciona</div><div class="desc-card"><strong>Checklist na doca</strong>O operador registra cada NC: avaria, código errado, quantidade divergente, lote sem rastreabilidade. Item vai para quarentena e gera apontamento para claim.</div></div><div><div class="d-sec">Diferença para o L3</div><div class="desc-card"><strong>Entrada vs. Inventário</strong>L2 age no momento da descarga. L3 age no estoque já armazenado, capturando problemas que surgiram após o recebimento.</div></div><div class="coming"><span class="material-icons-round">schedule</span>Dados em construção</div>`
+  },
+  3:{bg:'#3A9934',t:'Inventário rotativo nos CDs',
+    values:`<div><div class="d-sec">Resumo do ciclo</div><div class="kpi-row"><div class="kpi"><div class="kpi-lbl">Valor NC</div><div class="kpi-val" id="d3v">R$ 42,56K</div><div class="kpi-hint" id="d3r">estoque 09/02</div></div><div class="kpi"><div class="kpi-lbl">Itens NC</div><div class="kpi-val" id="d3q">2.319</div><div class="kpi-hint">não-conformes</div></div><div class="kpi"><div class="kpi-lbl">CDs</div><div class="kpi-val">3</div><div class="kpi-hint">PE · SC · SP</div></div></div></div><div><div class="d-sec">Top peças por valor</div><table class="d-table"><thead><tr><th>Peça</th><th>CD</th><th>Qtd</th><th>Valor</th></tr></thead><tbody id="d3t"><tr><td>Carenagem Farol Preto<div class="bar-wrap"><div class="bar-fill" style="width:95%"></div></div></td><td><span class="cd cd-sp">SP</span><span class="cd cd-sc">SC</span><span class="cd cd-pe">PE</span></td><td>80</td><td>R$40.244</td></tr><tr><td>Arruela Externa Eixo Traseiro<div class="bar-wrap"><div class="bar-fill" style="width:12%"></div></div></td><td><span class="cd cd-sc">SC</span></td><td>1.340</td><td>R$1.313</td></tr><tr><td>Porca Sextavada M10<div class="bar-wrap"><div class="bar-fill" style="width:8%"></div></div></td><td><span class="cd cd-sp">SP</span></td><td>722</td><td>R$729</td></tr><tr><td>Cavalete Lateral<div class="bar-wrap"><div class="bar-fill" style="width:1%"></div></div></td><td><span class="cd cd-pe">PE</span></td><td>10</td><td>R$151</td></tr><tr><td>Parafuso Allen 8×27<div class="bar-wrap"><div class="bar-fill" style="width:1%"></div></div></td><td><span class="cd cd-sc">SC</span></td><td>100</td><td>R$54</td></tr></tbody></table></div><div><div class="d-sec">Taxa NC — Carenagem por CD</div><table class="d-table"><thead><tr><th>CD</th><th>Insp.</th><th>NC</th><th>Taxa</th><th>Estoque</th></tr></thead><tbody><tr><td><span class="cd cd-sp">CD-SP</span></td><td>81</td><td>62</td><td>76,5%<div class="bar-wrap"><div class="bar-fill bar-red" style="width:77%"></div></div></td><td>86 un</td></tr><tr><td><span class="cd cd-pe">CD-PE</span></td><td>11</td><td>8</td><td>72,7%<div class="bar-wrap"><div class="bar-fill bar-red" style="width:73%"></div></div></td><td>2.850 un</td></tr><tr><td><span class="cd cd-sc">CD-SC</span></td><td>52</td><td>10</td><td>19,2%<div class="bar-wrap"><div class="bar-fill bar-amber" style="width:19%"></div></div></td><td>538 un</td></tr></tbody></table></div><div><div class="info-box">Carenagem extrapolada ao estoque de 09/02 (3.474 un · R$17,95/un) pela taxa NC amostral por CD. <strong>ELETRIC SAI</strong> (63 un, CD-PE) sem preço de referência.</div></div><div>' + renderChart(TS.l3) + '</div>`,
+    desc:`<div><div class="d-sec">O que captura</div><div class="desc-card"><strong>Problemas pós-recebimento</strong>Defeitos latentes, danos de manuseio, itens misturados ou fora de especificação — identificados na vistoria periódica do estoque já armazenado.</div></div><div><div class="d-sec">Como funciona</div><div class="desc-card"><strong>Vistoria semanal em SKUs críticos</strong>A cada ciclo, SKUs com histórico de defeito são inspecionados fisicamente no endereço de armazenamento, com foto e descrição como evidência rastreável.</div></div><div><div class="d-sec">Critério de seleção</div><div class="desc-card"><strong>Histórico + incidência</strong>SKUs entram na lista quando aparecem no BI de descarte, têm reclamações das filiais ou fazem parte de lotes suspeitos do fornecedor.</div></div>`
+  },
+  4:{bg:'#2E7D32',t:'AI Agent nas filiais',
+    values:`<div><div class="d-sec">Resumo do período</div><div class="kpi-row"><div class="kpi"><div class="kpi-lbl">Valor descartado</div><div class="kpi-val" id="d4v">R$ 60,65K</div><div class="kpi-hint">peças refugadas</div></div><div class="kpi"><div class="kpi-lbl">Total refugo</div><div class="kpi-val" id="d4r">1.416</div><div class="kpi-hint">unidades</div></div><div class="kpi"><div class="kpi-lbl">Ticket médio</div><div class="kpi-val" id="d4t">R$ 42,8</div><div class="kpi-hint">por unidade</div></div></div></div><div>' + renderChart(TS.l4) + '</div>`,
+    desc:`<div><div class="d-sec">O que captura</div><div class="desc-card"><strong>Nenhuma perda sem claim</strong>Último recurso: peças defeituosas que chegaram à filial. Meta é garantir 100% dos descartes elegíveis virem claim aberto no portal TVS.</div></div><div><div class="d-sec">Como funciona</div><div class="desc-card"><strong>Guia o mecânico nas evidências</strong>Ao identificar a peça defeituosa, o AI Agent conduz o mecânico: foto da peça, foto da rastreabilidade, descrição — e abre o claim automaticamente.</div></div><div><div class="d-sec">Por que é o último recurso</div><div class="desc-card"><strong>Custo alto, evidência fraca</strong>Peça que chega à filial já gerou frete e armazenagem. A evidência de defeito fica mais difícil após instalação. Por isso L1–L3 precisam funcionar bem para reduzir a pressão aqui.</div></div>`
+  }
+};
+
+function fmtK(v){return'R$ '+(v/1000).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2})+'K';}
+function fmtBRL(v){return'R$ '+v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});}
+
+function openDrawer(n,type){
+  var d=DATA[n];
+  var c=type==='values'?d.values:d.desc;
+  if(!c)return;
+  document.getElementById('d-num').style.background=d.bg;
+  document.getElementById('d-num').textContent=n;
+  document.getElementById('d-title').textContent=d.t;
+  document.getElementById('d-pill').textContent=type==='values'?'Peças & Valores':'Sobre a camada';
+  document.getElementById('d-body').innerHTML=c;
+  document.getElementById('overlay').classList.add('open');
+  document.getElementById('drawer').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeDrawer(){
+  document.getElementById('overlay').classList.remove('open');
+  document.getElementById('drawer').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeDrawer();});
+
+function applyData(){
+  if(typeof DADOS==='undefined')return;
+  var l3=DADOS.l3,l4=DADOS.l4;
+  document.getElementById('vb-l3-num').textContent=fmtK(l3.total_valor);
+  document.getElementById('vb-l3-sub').textContent=l3.total_qty.toLocaleString('pt-BR')+' itens NC';
+  document.getElementById('vb-l4-num').textContent=fmtK(l4.total_valor);
+  document.getElementById('vb-l4-sub').textContent=l4.total_refugo.toLocaleString('pt-BR')+' refugos';
+  document.getElementById('chip-total').textContent=fmtBRL(l3.total_valor+l4.total_valor);
+  var b=document.getElementById('badge-atualizado');
+  if(b)b.textContent='Atualizado em '+DADOS.atualizado_em;
+}
+var s=document.createElement('script');
+s.src='data.js?v='+Date.now();
+s.onload=applyData;
+document.head.appendChild(s);
+</script>
 </body>
 </html>
