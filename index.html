@@ -412,6 +412,120 @@ body {
 .coming { text-align: center; padding: 28px 12px; color: var(--gray-20); font-size: 12px; }
 .coming .material-icons-round { font-size: 32px !important; display: block;
   margin: 0 auto 8px; color: var(--gray-10); }
+
+/* ── MODAL GRÁFICO ── */
+.chart-modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.5);
+  z-index: 200;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity .22s;
+}
+.chart-modal-overlay.open { opacity: 1; pointer-events: all; }
+.chart-modal {
+  background: var(--white);
+  border-radius: 10px;
+  padding: 28px 32px 24px;
+  width: 1400px;
+  max-width: 98vw;
+  box-shadow: 0 16px 64px rgba(0,0,0,.22);
+  position: relative;
+  transform: scale(.96);
+  transition: transform .22s cubic-bezier(.4,0,.2,1);
+}
+.chart-modal-overlay.open .chart-modal { transform: scale(1); }
+.chart-modal-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 18px;
+}
+.chart-modal-title {
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px; font-weight: 700;
+  color: var(--black);
+  letter-spacing: -0.01em;
+}
+.chart-modal-close {
+  background: var(--gray-05); border: 1px solid var(--gray-10);
+  border-radius: 6px; width: 30px; height: 30px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--gray-40);
+  transition: background .12s;
+}
+.chart-modal-close:hover { background: var(--gray-10); color: var(--black); }
+.chart-clickable { cursor: pointer; transition: opacity .15s; }
+.chart-clickable:hover { opacity: .85; }
+.chart-modal-body-wrap {
+  display: flex; gap: 20px; align-items: flex-start;
+}
+.chart-modal-left { flex: 1; min-width: 0; }
+.chart-modal-right {
+  width: 340px; flex-shrink: 0;
+  border-left: 1px solid var(--gray-10);
+  padding-left: 18px;
+  min-height: 260px;
+}
+.month-detail-empty {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; height: 220px;
+  color: var(--gray-20);
+  font-family: 'Barlow', sans-serif;
+  font-size: 12px; text-align: center;
+  gap: 8px;
+}
+.month-detail-empty .material-icons-round { font-size: 32px; }
+.month-title {
+  font-family: 'Barlow', sans-serif;
+  font-size: 22px; font-weight: 800;
+  color: var(--black); letter-spacing: -0.02em;
+  margin-bottom: 2px;
+}
+.month-val {
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px; font-weight: 700;
+  color: var(--green-dark); margin-bottom: 12px;
+}
+.month-skus-title {
+  font-family: 'Barlow', sans-serif;
+  font-size: 8px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .09em;
+  color: var(--gray-40); margin-bottom: 7px;
+}
+.month-sku-row {
+  display: flex; align-items: center;
+  gap: 6px; margin-bottom: 7px;
+}
+.month-sku-bar-wrap {
+  flex: 1; height: 4px; background: var(--gray-10);
+  border-radius: 2px; overflow: hidden;
+}
+.month-sku-bar { height: 100%; background: var(--green); border-radius: 2px; }
+.month-sku-name {
+  font-size: 10px; color: var(--gray-80);
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.3; margin-bottom: 1px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  max-width: 200px;
+}
+.month-sku-val {
+  font-family: 'Barlow', sans-serif;
+  font-size: 10px; font-weight: 700;
+  color: var(--black); white-space: nowrap;
+}
+.month-sku-qty {
+  font-family: 'Barlow', sans-serif;
+  font-size: 9px; color: var(--gray-40);
+}
+.bar-selected rect { stroke: #1B5E20; stroke-width: 1.5; }
+.chart-clickable-hint {
+  text-align: center;
+  font-size: 9px;
+  color: var(--gray-40);
+  font-family: 'Barlow', sans-serif;
+  margin-top: 3px;
+  letter-spacing: .05em;
+}
+
 </style>
 </head>
 <body>
@@ -544,8 +658,8 @@ body {
   <div class="row l4">
     <div class="vb clickable" onclick="openDrawer(4,'values')">
       <span class="vb-lbl">Valor descartado</span>
-      <span class="vb-num" id="vb-l4-num">R$ 60,65K</span>
-      <span class="vb-sub" id="vb-l4-sub">1.416 refugos</span>
+      <span class="vb-num" id="vb-l4-num">R$ 77,39K</span>
+      <span class="vb-sub" id="vb-l4-sub">1.726 refugos</span>
     </div>
     <div class="layer-clickable" onclick="openDrawer(4,'desc')">
       <div class="lb"><div class="lb-num">4</div>
@@ -571,7 +685,7 @@ body {
     <div class="chips">
       <div class="chip chip-total">
         <div class="chip-lbl">Total NC identificado (L3 + L4)</div>
-        <div class="chip-val" id="chip-total">R$ 103.213,28</div>
+        <div class="chip-val" id="chip-total">R$ 119.953,81</div>
       </div>
       <div class="chip">
         <div class="chip-lbl">L1 + L2</div>
@@ -612,6 +726,69 @@ var TS = {
     ]
   }
 };
+
+var L4MONTHLY = {
+    '2025-07': {label:'Jul/25', val:2201.44, qty:48, skus:[
+      {n:'Tanque Combustível Sport',qty:8,val:1265.57},
+      {n:'Kit Cilindro USHA',qty:3,val:293.28},
+      {n:'Cabeçote Alumínio Motor',qty:1,val:125.61},
+      {n:'Bomba de Combustível',qty:1,val:110.31}
+    ]},
+    '2025-08': {label:'Ago/25', val:4982.66, qty:242, skus:[
+      {n:'Tanque Combustível Sport',qty:15,val:2372.95},
+      {n:'Junta Central Carcaça Dir.',qty:35,val:436.10},
+      {n:'Corrente de Transmissão',qty:21,val:412.79},
+      {n:'Bag Mottu 80L',qty:3,val:321.46}
+    ]},
+    '2025-09': {label:'Set/25', val:14463.10, qty:187, skus:[
+      {n:'NA320030 (Magneto)',qty:41,val:5224.49},
+      {n:'IP-06-0051',qty:24,val:4466.24},
+      {n:'IP-06-0041',qty:12,val:2233.12},
+      {n:'61100-GFP-C30ZC',qty:42,val:1643.32}
+    ]},
+    '2025-10': {label:'Out/25', val:16672.51, qty:199, skus:[
+      {n:'42635-K62-B00ZA',qty:62,val:10298.41},
+      {n:'IP-03-0019',qty:16,val:2486.51},
+      {n:'Bateria 31500-GFP-905',qty:33,val:1641.42},
+      {n:'Tanque Combustível Sport',qty:3,val:474.59}
+    ]},
+    '2025-11': {label:'Nov/25', val:9210.27, qty:156, skus:[
+      {n:'NA320030 (Magneto)',qty:51,val:6498.76},
+      {n:'Tanque Combustível Sport',qty:7,val:1107.38},
+      {n:'Estator c/ Fiação 12V',qty:9,val:424.38},
+      {n:'Campana da Embreagem',qty:4,val:229.73}
+    ]},
+    '2025-12': {label:'Dez/25', val:10925.35, qty:215, skus:[
+      {n:'IP-03-0019',qty:51,val:7925.74},
+      {n:'NA320030 (Magneto)',qty:10,val:1274.27},
+      {n:'Limitador Tambor Seletor',qty:71,val:333.70},
+      {n:'Virabrequim do Motor',qty:2,val:254.68}
+    ]},
+    '2026-01': {label:'Jan/26', val:6622.58, qty:268, skus:[
+      {n:'Virabrequim do Motor',qty:17,val:2164.78},
+      {n:'Magneto ND320530',qty:7,val:891.99},
+      {n:'IP-03-0019',qty:4,val:621.63},
+      {n:'Assento/Banco Completo',qty:4,val:384.60}
+    ]},
+    '2026-02': {label:'Fev/26', val:6338.67, qty:177, skus:[
+      {n:'NA320030 (Magneto)',qty:21,val:2675.96},
+      {n:'Estator c/ Fiação 12V',qty:45,val:2121.90},
+      {n:'Virabrequim do Motor',qty:4,val:509.36},
+      {n:'Chip da Vivo IP-03-0003',qty:50,val:170.50}
+    ]},
+    '2026-03': {label:'Mar/26', val:4219.11, qty:137, skus:[
+      {n:'NA320030 (Magneto)',qty:14,val:1783.97},
+      {n:'Bag Mottu 80L',qty:7,val:750.07},
+      {n:'38770-K62-B01',qty:1,val:469.72},
+      {n:'Virabrequim do Motor',qty:3,val:382.02}
+    ]},
+    '2026-04': {label:'Abr/26', val:1754.34, qty:97, skus:[
+      {n:'Kit Cilindro USHA',qty:4,val:391.04},
+      {n:'Cubo da Embreagem',qty:23,val:346.30},
+      {n:'Virabrequim do Motor',qty:2,val:254.68},
+      {n:'Cabeçote Alumínio Motor',qty:2,val:251.23}
+    ]}
+  };
 function fmtN(v){if(v>=1000000)return(v/1000000).toFixed(1)+'M';if(v>=1000)return(v/1000).toFixed(0)+'K';return v;}
 function renderChart(ts){
   var W=410,H=130,PL=36,PR=8,PT=10,PB=28;
@@ -621,29 +798,36 @@ function renderChart(ts){
   var gap=cW/n,bW=Math.max(4,Math.floor(gap*0.6));
   var out='<div style="margin-bottom:4px"><span style="font-family:Barlow,sans-serif;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:#999">'+ts.label+'</span><span style="float:right;font-family:Barlow,sans-serif;font-size:8px;color:#bbb">'+ts.note+'</span></div>';
   var svg='<svg width="100%" viewBox="0 0 '+W+' '+H+'" style="display:block;overflow:visible">';
-  for(var g=1;g<=3;g++){var yg=PT+cH*(1-g/3);svg+='<line x1="'+PL+'" y1="'+yg+'" x2="'+(W-PR)+'" y2="'+yg+'" stroke="#EEEEEE" stroke-width="1"/><text x="'+(PL-4)+'" y="'+(yg+3)+'" text-anchor="end" font-size="8" fill="#BBBBBB">'+fmtN(Math.round(maxV*g/3))+'</text>';}
-  var tpts=[];
+  for(var g=1;g<=3;g++){
+    var yg=PT+cH*(1-g/3);
+    svg+='<line x1="'+PL+'" y1="'+yg+'" x2="'+(W-PR)+'" y2="'+yg+'" stroke="#EEEEEE" stroke-width="1"/>';
+    svg+='<text x="'+(PL-4)+'" y="'+(yg+3)+'" text-anchor="end" font-size="8" fill="#BBBBBB">'+fmtN(Math.round(maxV*g/3))+'</text>';
+  }
   for(var i=0;i<n;i++){
     var d=data[i];
     var bH=Math.max(2,Math.round((d.v/maxV)*cH));
     var x=PL+i*gap+(gap-bW)/2,y=PT+cH-bH;
     var col=d.partial?'rgba(79,174,69,.3)':'#4FAE45';
-    svg+='<rect x="'+x+'" y="'+y+'" width="'+bW+'" height="'+bH+'" rx="2" fill="'+col+'"><title>'+d.m+': '+d.v.toLocaleString('pt-BR')+' '+ts.unit+'</title></rect>';
+    var tipVal=ts.unit==='R$'?'R$ '+d.v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}):d.v.toLocaleString('pt-BR')+' '+ts.unit;
+    svg+='<rect x="'+x+'" y="'+y+'" width="'+bW+'" height="'+bH+'" rx="2" fill="'+col+'"><title>'+d.m+': '+tipVal+'</title></rect>';
     var step=n>12?3:n>8?2:1;
-    if(i%step===0||i===n-1)svg+='<text x="'+(x+bW/2)+'" y="'+(H-PB+12)+'" text-anchor="middle" font-size="7.5" fill="#BBBBBB">'+d.m+'</text>';
-    tpts.push({x:x+bW/2,y:PT+cH-(d.v/maxV)*cH});
+    if(i%step===0||i===n-1)
+      svg+='<text x="'+(x+bW/2)+'" y="'+(H-PB+12)+'" text-anchor="middle" font-size="7.5" fill="#BBBBBB">'+d.m+'</text>';
+    // Valor dentro da barra
+    var lbl=fmtN(d.v);
+    if(bH>14)
+      svg+='<text x="'+(x+bW/2)+'" y="'+(y+bH-5)+'" text-anchor="middle" font-size="7" font-weight="700" fill="rgba(255,255,255,.9)">'+lbl+'</text>';
   }
-  if(tpts.length>2){var tp='M';for(var i=0;i<tpts.length;i++)tp+=(i?'L':'')+tpts[i].x+' '+tpts[i].y;svg+='<path d="'+tp+'" fill="none" stroke="rgba(79,174,69,.45)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="3,2"/>';}
-  svg+='</svg>';
-  return out+svg;
+  var chartHtml = out+svg+'</svg>';
+  var tsKey = (ts===TS.l3)?'l3':'l4';
+  return '<div class="chart-clickable" onclick="openChartModal(TS.'+tsKey+',\''+ts.label+'\')">'+chartHtml+'<div class="chart-clickable-hint">&#9650; clique para ampliar</div></div>';
 }
-
 
 var TS = {
   l3: { label:'Ajustes negativos nos CDs', unit:'itens', note:'Abr/26 parcial',
     data:[{m:'Jan/25',v:37737},{m:'Fev/25',v:82509},{m:'Mar/25',v:554147},{m:'Abr/25',v:367173},{m:'Mai/25',v:82690},{m:'Jun/25',v:1102457},{m:'Jul/25',v:64001},{m:'Ago/25',v:104250},{m:'Set/25',v:178792},{m:'Out/25',v:307858},{m:'Nov/25',v:90875},{m:'Dez/25',v:291048},{m:'Jan/26',v:167996},{m:'Fev/26',v:172775},{m:'Mar/26',v:184266},{m:'Abr/26',v:22197,partial:true}]},
-  l4: { label:'Peças descartadas nas filiais', unit:'peças', note:'Abr/26 parcial',
-    data:[{m:'Jul/25',v:48},{m:'Ago/25',v:242},{m:'Set/25',v:187},{m:'Out/25',v:197},{m:'Nov/25',v:156},{m:'Dez/25',v:215},{m:'Jan/26',v:267},{m:'Fev/26',v:177},{m:'Mar/26',v:134},{m:'Abr/26',v:77,partial:true}]}
+  l4: { label:'Valor descartado nas filiais (R$)', unit:'R$', note:'Abr/26 parcial',
+    data:[{m:'Jul/25',v:2201.44},{m:'Ago/25',v:4982.66},{m:'Set/25',v:14463.1},{m:'Out/25',v:16672.51},{m:'Nov/25',v:9210.27},{m:'Dez/25',v:10925.35},{m:'Jan/26',v:6622.58},{m:'Fev/26',v:6338.67},{m:'Mar/26',v:4219.11},{m:'Abr/26',v:1754.34,partial:true}]}
 };
 function fmtN(v){if(v>=1000000)return(v/1000000).toFixed(1)+'M';if(v>=1000)return(v/1000).toFixed(0)+'K';return String(v);}
 function renderChart(ts){
@@ -662,8 +846,10 @@ function renderChart(ts){
     if(i%step===0||i===n-1)svg+='<text x="'+(x+bW/2)+'" y="'+(H-PB+12)+'" text-anchor="middle" font-size="7.5" fill="#BBBBBB">'+d.m+'</text>';
     tpts.push([x+bW/2,PT+cH-(d.v/maxV)*cH]);
   }
-  if(tpts.length>2){var tp='';for(var i=0;i<tpts.length;i++)tp+=(i?'L':'M')+tpts[i][0]+' '+tpts[i][1];svg+='<path d="'+tp+'" fill="none" stroke="rgba(79,174,69,.45)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="3,2"/>';}
-  return out+svg+'</svg>';
+  var chartHtml = out+svg+'</svg>';
+  var tsLabel = ts.label;
+  var clickWrapper = '<div class="chart-clickable" onclick="openChartModal(TS.' + (ts===TS.l3?'l3':'l4') + ',\''+tsLabel+'\')">'+chartHtml+'<div class="chart-clickable-hint">&#9650; clique para ampliar</div></div>';
+  return clickWrapper;
 }
 
 var DATA = {
@@ -674,11 +860,40 @@ var DATA = {
     desc:`<div><div class="d-sec">O que captura</div><div class="desc-card"><strong>Avarias e divergências na entrada</strong>Peças com dano físico, código incorreto ou divergência de quantidade são bloqueadas no recebimento, antes de entrar no estoque ativo.</div></div><div><div class="d-sec">Como funciona</div><div class="desc-card"><strong>Checklist na doca</strong>O operador registra cada NC: avaria, código errado, quantidade divergente, lote sem rastreabilidade. Item vai para quarentena e gera apontamento para claim.</div></div><div><div class="d-sec">Diferença para o L3</div><div class="desc-card"><strong>Entrada vs. Inventário</strong>L2 age no momento da descarga. L3 age no estoque já armazenado, capturando problemas que surgiram após o recebimento.</div></div><div class="coming"><span class="material-icons-round">schedule</span>Dados em construção</div>`
   },
   3:{bg:'#3A9934',t:'Inventário rotativo nos CDs',
-    values:`<div><div class="d-sec">Resumo do ciclo</div><div class="kpi-row"><div class="kpi"><div class="kpi-lbl">Valor NC</div><div class="kpi-val" id="d3v">R$ 42,56K</div><div class="kpi-hint" id="d3r">estoque 09/02</div></div><div class="kpi"><div class="kpi-lbl">Itens NC</div><div class="kpi-val" id="d3q">2.319</div><div class="kpi-hint">não-conformes</div></div><div class="kpi"><div class="kpi-lbl">CDs</div><div class="kpi-val">3</div><div class="kpi-hint">PE · SC · SP</div></div></div></div><div><div class="d-sec">Top peças por valor</div><table class="d-table"><thead><tr><th>Peça</th><th>CD</th><th>Qtd</th><th>Valor</th></tr></thead><tbody id="d3t"><tr><td>Carenagem Farol Preto<div class="bar-wrap"><div class="bar-fill" style="width:95%"></div></div></td><td><span class="cd cd-sp">SP</span><span class="cd cd-sc">SC</span><span class="cd cd-pe">PE</span></td><td>80</td><td>R$40.244</td></tr><tr><td>Arruela Externa Eixo Traseiro<div class="bar-wrap"><div class="bar-fill" style="width:12%"></div></div></td><td><span class="cd cd-sc">SC</span></td><td>1.340</td><td>R$1.313</td></tr><tr><td>Porca Sextavada M10<div class="bar-wrap"><div class="bar-fill" style="width:8%"></div></div></td><td><span class="cd cd-sp">SP</span></td><td>722</td><td>R$729</td></tr><tr><td>Cavalete Lateral<div class="bar-wrap"><div class="bar-fill" style="width:1%"></div></div></td><td><span class="cd cd-pe">PE</span></td><td>10</td><td>R$151</td></tr><tr><td>Parafuso Allen 8×27<div class="bar-wrap"><div class="bar-fill" style="width:1%"></div></div></td><td><span class="cd cd-sc">SC</span></td><td>100</td><td>R$54</td></tr></tbody></table></div><div><div class="d-sec">Taxa NC — Carenagem por CD</div><table class="d-table"><thead><tr><th>CD</th><th>Insp.</th><th>NC</th><th>Taxa</th><th>Estoque</th></tr></thead><tbody><tr><td><span class="cd cd-sp">CD-SP</span></td><td>81</td><td>62</td><td>76,5%<div class="bar-wrap"><div class="bar-fill bar-red" style="width:77%"></div></div></td><td>86 un</td></tr><tr><td><span class="cd cd-pe">CD-PE</span></td><td>11</td><td>8</td><td>72,7%<div class="bar-wrap"><div class="bar-fill bar-red" style="width:73%"></div></div></td><td>2.850 un</td></tr><tr><td><span class="cd cd-sc">CD-SC</span></td><td>52</td><td>10</td><td>19,2%<div class="bar-wrap"><div class="bar-fill bar-amber" style="width:19%"></div></div></td><td>538 un</td></tr></tbody></table></div><div><div class="info-box">Carenagem extrapolada ao estoque de 09/02 (3.474 un · R$17,95/un) pela taxa NC amostral por CD. <strong>ELETRIC SAI</strong> (63 un, CD-PE) sem preço de referência.</div></div><div>' + renderChart(TS.l3) + '</div>`,
+    values:`<div><div class="d-sec">Resumo do ciclo</div><div class="kpi-row"><div class="kpi"><div class="kpi-lbl">Valor NC</div><div class="kpi-val" id="d3v">R$ 42,56K</div><div class="kpi-hint" id="d3r">estoque 09/02</div></div><div class="kpi"><div class="kpi-lbl">Itens NC</div><div class="kpi-val" id="d3q">2.319</div><div class="kpi-hint">não-conformes</div></div><div class="kpi"><div class="kpi-lbl">CDs</div><div class="kpi-val">3</div><div class="kpi-hint">PE · SC · SP</div></div></div></div><div><div class="d-sec">Top peças por valor</div><table class="d-table"><thead><tr><th>Peça</th><th>CD</th><th>Qtd</th><th>Valor</th></tr></thead><tbody id="d3t"><tr><td>Carenagem Farol Preto<div class="bar-wrap"><div class="bar-fill" style="width:95%"></div></div></td><td><span class="cd cd-sp">SP</span><span class="cd cd-sc">SC</span><span class="cd cd-pe">PE</span></td><td>80</td><td>R$40.244</td></tr><tr><td>Arruela Externa Eixo Traseiro<div class="bar-wrap"><div class="bar-fill" style="width:12%"></div></div></td><td><span class="cd cd-sc">SC</span></td><td>1.340</td><td>R$1.313</td></tr><tr><td>Porca Sextavada M10<div class="bar-wrap"><div class="bar-fill" style="width:8%"></div></div></td><td><span class="cd cd-sp">SP</span></td><td>722</td><td>R$729</td></tr><tr><td>Cavalete Lateral<div class="bar-wrap"><div class="bar-fill" style="width:1%"></div></div></td><td><span class="cd cd-pe">PE</span></td><td>10</td><td>R$151</td></tr><tr><td>Parafuso Allen 8×27<div class="bar-wrap"><div class="bar-fill" style="width:1%"></div></div></td><td><span class="cd cd-sc">SC</span></td><td>100</td><td>R$54</td></tr></tbody></table></div><div><div class="d-sec">Taxa NC — Carenagem por CD</div><table class="d-table"><thead><tr><th>CD</th><th>Insp.</th><th>NC</th><th>Taxa</th><th>Estoque</th></tr></thead><tbody><tr><td><span class="cd cd-sp">CD-SP</span></td><td>81</td><td>62</td><td>76,5%<div class="bar-wrap"><div class="bar-fill bar-red" style="width:77%"></div></div></td><td>86 un</td></tr><tr><td><span class="cd cd-pe">CD-PE</span></td><td>11</td><td>8</td><td>72,7%<div class="bar-wrap"><div class="bar-fill bar-red" style="width:73%"></div></div></td><td>2.850 un</td></tr><tr><td><span class="cd cd-sc">CD-SC</span></td><td>52</td><td>10</td><td>19,2%<div class="bar-wrap"><div class="bar-fill bar-amber" style="width:19%"></div></div></td><td>538 un</td></tr></tbody></table></div><div><div class="info-box">Carenagem extrapolada ao estoque de 09/02 (3.474 un · R$17,95/un) pela taxa NC amostral por CD. <strong>ELETRIC SAI</strong> (63 un, CD-PE) sem preço de referência.</div></div><div>${renderChart(TS.l3)}</div>`,
     desc:`<div><div class="d-sec">O que captura</div><div class="desc-card"><strong>Problemas pós-recebimento</strong>Defeitos latentes, danos de manuseio, itens misturados ou fora de especificação — identificados na vistoria periódica do estoque já armazenado.</div></div><div><div class="d-sec">Como funciona</div><div class="desc-card"><strong>Vistoria semanal em SKUs críticos</strong>A cada ciclo, SKUs com histórico de defeito são inspecionados fisicamente no endereço de armazenamento, com foto e descrição como evidência rastreável.</div></div><div><div class="d-sec">Critério de seleção</div><div class="desc-card"><strong>Histórico + incidência</strong>SKUs entram na lista quando aparecem no BI de descarte, têm reclamações das filiais ou fazem parte de lotes suspeitos do fornecedor.</div></div>`
   },
   4:{bg:'#2E7D32',t:'AI Agent nas filiais',
-    values:`<div><div class="d-sec">Resumo do período</div><div class="kpi-row"><div class="kpi"><div class="kpi-lbl">Valor descartado</div><div class="kpi-val" id="d4v">R$ 60,65K</div><div class="kpi-hint">peças refugadas</div></div><div class="kpi"><div class="kpi-lbl">Total refugo</div><div class="kpi-val" id="d4r">1.416</div><div class="kpi-hint">unidades</div></div><div class="kpi"><div class="kpi-lbl">Ticket médio</div><div class="kpi-val" id="d4t">R$ 42,8</div><div class="kpi-hint">por unidade</div></div></div></div><div>' + renderChart(TS.l4) + '</div>`,
+    values:`<div><div class="d-sec">Resumo do período</div><div class="kpi-row"><div class="kpi"><div class="kpi-lbl">Valor descartado</div><div class="kpi-val" id="d4v">R$ 77,39K</div><div class="kpi-hint">valor estimado total</div></div><div class="kpi" id="kpi-refugo" onclick="toggleRefugo()" style="cursor:pointer;user-select:none" title="Clique para alternar"><div class="kpi-lbl">Total refugo <span style="font-size:9px;opacity:.5">↕</span></div><div class="kpi-val" id="d4r" data-qty="1.726" data-val="R$ 47,15/un" data-mode="qty">1.726</div><div class="kpi-hint" id="d4r-hint">unidades — clique p/ ver valor</div></div><div class="kpi"><div class="kpi-lbl">SKUs distintos</div><div class="kpi-val" style="color:#2E7D32">130</div><div class="kpi-hint">peças diferentes</div></div></div></div><div><div class="d-sec">Top peças por valor descartado</div><table class="d-table"><thead><tr><th>Peça</th><th>Qtd</th><th>Preço médio</th><th>Valor total</th></tr></thead><tbody><tr><td>Tanque Combustível Sport<div class="bar-wrap"><div class="bar-fill" style="width:95%"></div></div></td><td>37</td><td>R$158,20</td><td>R$5.853,28</td></tr><tr><td>Virabrequim do Motor<div class="bar-wrap"><div class="bar-fill" style="width:67%"></div></div></td><td>31</td><td>R$127,34</td><td>R$3.947,54</td></tr><tr><td>Estator c/ Fiação 12V<div class="bar-wrap"><div class="bar-fill" style="width:43%"></div></div></td><td>54</td><td>R$47,15</td><td>R$2.546,28</td></tr><tr><td>Bag Mottu 80L<div class="bar-wrap"><div class="bar-fill" style="width:22%"></div></div></td><td>12</td><td>R$107,15</td><td>R$1.285,84</td></tr><tr><td>Kit Cilindro USHA<div class="bar-wrap"><div class="bar-fill" style="width:18%"></div></div></td><td>11</td><td>R$97,76</td><td>R$1.075,36</td></tr><tr><td>Magneto<div class="bar-wrap"><div class="bar-fill" style="width:15%"></div></div></td><td>7</td><td>R$127,43</td><td>R$891,99</td></tr><tr><td>Cabeçote de Alumínio<div class="bar-wrap"><div class="bar-fill" style="width:13%"></div></div></td><td>6</td><td>R$125,61</td><td>R$753,68</td></tr><tr><td>Junta Carcaça Direita<div class="bar-wrap"><div class="bar-fill" style="width:11%"></div></div></td><td>52</td><td>R$12,46</td><td>R$647,92</td></tr></tbody></table></div><div><div class="info-box">
+Preço calculado pela média dos <strong>3 últimos recebimentos</strong> de cada SKU (join por OriginalCode + fallback PN_Limpo).
+</div></div>
+<div>
+<div class="d-sec">Cobertura de preço</div>
+<div style="background:#F5F5F5;border:1px solid #E0E0E0;border-radius:6px;padding:12px 14px">
+  <!-- barra de cobertura -->
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+    <div style="flex:1;height:8px;background:#E0E0E0;border-radius:4px;overflow:hidden">
+      <div style="width:95%;height:100%;background:#4FAE45;border-radius:4px"></div>
+    </div>
+    <span style="font-family:Barlow,sans-serif;font-size:11px;font-weight:700;color:#1A1A1A;white-space:nowrap">95% com preço</span>
+  </div>
+  <div style="display:flex;gap:16px">
+    <div>
+      <div style="font-family:Barlow,sans-serif;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#9E9E9E;margin-bottom:2px">Com referência</div>
+      <div style="font-family:Barlow,sans-serif;font-size:15px;font-weight:800;color:#2E7D32">1.642 un · 130 SKUs</div>
+    </div>
+    <div style="width:1px;background:#E0E0E0"></div>
+    <div>
+      <div style="font-family:Barlow,sans-serif;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#9E9E9E;margin-bottom:2px">Sem referência ⚠️</div>
+      <div style="font-family:Barlow,sans-serif;font-size:15px;font-weight:800;color:#E65100">84 un · 27 SKUs</div>
+    </div>
+  </div>
+  <div style="margin-top:10px;font-size:11px;color:#666;font-family:Poppins,sans-serif;line-height:1.6">
+    Os 27 SKUs sem preço restantes não foram encontrados em <code style="background:#EEEEEE;padding:1px 5px;border-radius:3px;font-size:10px">estoque_recebimentos</code> nem pelo OriginalCode nem pelo PN_Limpo. 
+    Mapeamento manual em andamento — valor atual está <strong>subestimado</strong>.
+  </div>
+</div>
+</div><div>${renderChart(TS.l4)}</div>`,
     desc:`<div><div class="d-sec">O que captura</div><div class="desc-card"><strong>Nenhuma perda sem claim</strong>Último recurso: peças defeituosas que chegaram à filial. Meta é garantir 100% dos descartes elegíveis virem claim aberto no portal TVS.</div></div><div><div class="d-sec">Como funciona</div><div class="desc-card"><strong>Guia o mecânico nas evidências</strong>Ao identificar a peça defeituosa, o AI Agent conduz o mecânico: foto da peça, foto da rastreabilidade, descrição — e abre o claim automaticamente.</div></div><div><div class="d-sec">Por que é o último recurso</div><div class="desc-card"><strong>Custo alto, evidência fraca</strong>Peça que chega à filial já gerou frete e armazenagem. A evidência de defeito fica mais difícil após instalação. Por isso L1–L3 precisam funcionar bem para reduzir a pressão aqui.</div></div>`
   }
 };
@@ -717,10 +932,174 @@ function applyData(){
   var b=document.getElementById('badge-atualizado');
   if(b)b.textContent='Atualizado em '+DADOS.atualizado_em;
 }
+
+function renderMonthDetail(key) {
+  if(!L4MONTHLY || !L4MONTHLY[key]) return '';
+  var monthly = L4MONTHLY;
+  var m = monthly[key];
+  var maxVal = Math.max.apply(null, m.skus.map(function(s){return s.val;}));
+  var fmtV = function(v){return 'R$ '+v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});};
+  var html = '<div class="month-title">'+m.label+'</div>';
+  html += '<div class="month-val">'+fmtV(m.val)+' &nbsp;·&nbsp; '+m.qty+' peças</div>';
+  html += '<div class="month-skus-title">Top peças do mês</div>';
+  m.skus.forEach(function(s){
+    var pct = Math.round((s.val/maxVal)*100);
+    html += '<div>';
+    html += '<div style="display:flex;justify-content:space-between;align-items:baseline">';
+    html += '<span class="month-sku-name">'+s.n+'</span>';
+    html += '<span class="month-sku-val">'+fmtV(s.val)+'</span></div>';
+    html += '<div style="display:flex;align-items:center;gap:6px;margin-top:2px;margin-bottom:7px">';
+    html += '<div class="month-sku-bar-wrap"><div class="month-sku-bar" style="width:'+pct+'%"></div></div>';
+    html += '<span class="month-sku-qty">'+s.qty+' un</span></div></div>';
+  });
+  return html;
+}
+
+function openChartModal(ts, title) {
+  document.getElementById('chart-modal-title').textContent = title;
+
+  var data = ts.data;
+  var maxV = Math.max.apply(null, data.map(function(d){return d.v;}));
+  var mesMap = {'Jan':'01','Fev':'02','Mar':'03','Abr':'04','Mai':'05',
+                'Jun':'06','Jul':'07','Ago':'08','Set':'09','Out':'10','Nov':'11','Dez':'12'};
+
+  // Gráfico em HTML puro — sem SVG, sem problemas de clique
+  var CHART_H = 280; // altura em px da área de barras
+
+  // Wrapper com posição relativa para as grid lines
+  var barsHtml = '<div style="position:relative;margin-bottom:4px">';
+
+  // Grid lines absolutas
+  barsHtml += '<div style="position:absolute;left:0;right:0;top:0;height:'+CHART_H+'px;pointer-events:none">';
+  for (var g = 1; g <= 4; g++) {
+    var gpx = Math.round(CHART_H * (1 - g/4));
+    barsHtml += '<div style="position:absolute;left:0;right:0;top:'+gpx+'px;border-top:1px solid #F0F0F0"></div>';
+  }
+  barsHtml += '</div>';
+
+  // Flex container das barras, altura fixa em px
+  barsHtml += '<div style="display:flex;align-items:flex-end;gap:4px;height:'+CHART_H+'px;position:relative;z-index:1">';
+
+  for (var i = 0; i < data.length; i++) {
+    var d = data[i];
+    var barPx = Math.max(3, Math.round((d.v / maxV) * CHART_H));
+    var col = d.partial ? 'rgba(79,174,69,.35)' : '#4FAE45';
+    var mk = mesMap[d.m.slice(0,3)];
+    var yr = '20' + d.m.slice(-2);
+    var monthKey = yr + '-' + mk;
+    var lbl = ts.unit === 'R$' ? 'R$' + fmtN(d.v) : fmtN(d.v);
+
+    barsHtml +=
+      '<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;cursor:pointer" onclick="window._mClick(\'' + monthKey + '\')"  data-key="' + monthKey + '">'
+      // Valor acima da barra
+      +'<div style="font-family:Barlow,sans-serif;font-size:8.5px;font-weight:700;color:#444;white-space:nowrap;margin-bottom:4px">'+lbl+'</div>'
+      // Barra com altura em px
+      +'<div class="chart-bar-el" style="width:85%;height:'+barPx+'px;background:'+col
+      +';border-radius:3px 3px 0 0;transition:filter .15s"></div>'
+      +'</div>';
+  }
+
+  barsHtml += '</div>';
+
+  // Labels dos meses abaixo
+  barsHtml += '<div style="display:flex;gap:4px;margin-top:5px">';
+  for (var i = 0; i < data.length; i++) {
+    barsHtml += '<div style="flex:1;text-align:center;font-family:Barlow,sans-serif;font-size:12px;color:#AAAAAA">'+data[i].m+'</div>';
+  }
+  barsHtml += '</div></div>';
+
+  var detail = '<div class="month-detail-empty">'
+    +'<span class="material-icons-round">touch_app</span>'
+    +'Clique em um mês<br>para ver o detalhe</div>';
+
+  document.getElementById('chart-modal-body').innerHTML =
+    '<div class="chart-modal-body-wrap">'
+    +'<div class="chart-modal-left">'+barsHtml+'</div>'
+    +'<div class="chart-modal-right" id="chart-modal-detail">'+detail+'</div>'
+    +'</div>';
+
+  // Função global chamada diretamente pelo onclick de cada barra
+  window._mClick = function(key) {
+    // Reset visuais
+    var cols = document.querySelectorAll('#chart-modal-body [data-key]');
+    cols.forEach(function(b) {
+      var bar = b.querySelector('.chart-bar-el');
+      if (bar) bar.style.filter = '';
+    });
+    // Destaca barra do mês clicado
+    var col = document.querySelector('#chart-modal-body [data-key="' + key + '"]');
+    if (col) {
+      var bar = col.querySelector('.chart-bar-el');
+      if (bar) bar.style.filter = 'brightness(0.65)';
+    }
+    // Mostra detalhe
+    var html = renderMonthDetail(key);
+    var panel = document.getElementById('chart-modal-detail');
+    if (panel) panel.innerHTML = html || '<div class="month-detail-empty"><span class="material-icons-round">search_off</span>Sem dados para '+key+'</div>';
+  };
+
+  document.getElementById('chart-modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function selectChartMonth(el) {
+  var key = el.getAttribute('data-key');
+  if (!key) return;
+  // Reset todos
+  var all = document.querySelectorAll('#chart-modal-body [data-key]');
+  all.forEach(function(b) {
+    var bar = b.querySelector('.chart-bar-el');
+    if (bar) bar.style.filter = '';
+    b.style.background = '';
+  });
+  // Destaca selecionado
+  var bar = el.querySelector('.chart-bar-el');
+  if (bar) bar.style.filter = 'brightness(0.7)';
+  // Atualiza painel
+  var html = renderMonthDetail(key);
+  if (html) document.getElementById('chart-modal-detail').innerHTML = html;
+}
+
+
+function closeChartModal(e) {
+  if(e && e.target !== document.getElementById('chart-modal-overlay')) return;
+  document.getElementById('chart-modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function toggleRefugo() {
+  var el = document.getElementById('d4r');
+  var hint = document.getElementById('d4r-hint');
+  if(!el) return;
+  if(el.dataset.mode === 'qty') {
+    el.textContent = el.dataset.val;
+    hint.textContent = 'ticket médio por unidade';
+    el.dataset.mode = 'val';
+  } else {
+    el.textContent = el.dataset.qty;
+    hint.textContent = 'unidades — clique p/ ver valor';
+    el.dataset.mode = 'qty';
+  }
+}
+
 var s=document.createElement('script');
 s.src='data.js?v='+Date.now();
 s.onload=applyData;
 document.head.appendChild(s);
 </script>
+
+<!-- ── MODAL GRÁFICO ── -->
+<div class="chart-modal-overlay" id="chart-modal-overlay" onclick="closeChartModal(event)">
+  <div class="chart-modal">
+    <div class="chart-modal-header">
+      <span class="chart-modal-title" id="chart-modal-title"></span>
+      <button class="chart-modal-close" onclick="closeChartModal()">
+        <span class="material-icons-round" style="font-size:16px">close</span>
+      </button>
+    </div>
+    <div id="chart-modal-body"></div>
+  </div>
+</div>
+
 </body>
 </html>
