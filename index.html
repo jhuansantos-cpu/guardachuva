@@ -526,16 +526,269 @@ body {
   letter-spacing: .05em;
 }
 
+
+.fontes {
+  margin-top: 14px; padding-top: 12px;
+  border-top: 1px solid var(--gray-10);
+  text-align: center;
+}
+.fontes-lbl {
+  font-family: 'Barlow', sans-serif;
+  font-size: 9px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .09em;
+  color: var(--gray-20);
+  display: block; margin-bottom: 6px;
+}
+.fontes-list { display: inline-flex; flex-direction: column; gap: 3px; text-align: left; }
+.fontes-row { display: flex; align-items: center; gap: 8px; }
+.fontes-tag {
+  font-family: 'Barlow', sans-serif;
+  font-size: 8px; font-weight: 700;
+  color: var(--green-dark);
+  background: var(--green-light);
+  border-radius: 3px; padding: 1px 5px;
+  min-width: 34px; text-align: center;
+  white-space: nowrap;
+}
+.fontes-row code {
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 9.5px; color: var(--gray-20);
+  background: none;
+}
+
+
+.drawer-fontes {
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: 4px 6px; padding: 10px 0 2px;
+  border-top: 1px solid var(--gray-10);
+  margin-top: 4px;
+}
+.df-lbl {
+  font-family: 'Barlow', sans-serif;
+  font-size: 8px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .09em;
+  color: var(--gray-20);
+}
+.drawer-fontes code {
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 9px; color: var(--gray-20);
+  background: none;
+}
+.df-sep { color: var(--gray-10); font-size: 10px; }
+
+
+/* ── NAVIGATION TABS ── */
+.nav-tabs {
+  display: flex; gap: 2px; margin-left: 16px;
+}
+.nav-tab {
+  font-family: 'Barlow', sans-serif;
+  font-size: 12px; font-weight: 600;
+  padding: 6px 14px; border-radius: 6px;
+  cursor: pointer; border: none; background: none;
+  color: var(--gray-40);
+  transition: background .15s, color .15s;
+  display: flex; align-items: center; gap: 6px;
+  text-decoration: none;
+}
+.nav-tab:hover { background: var(--gray-05); color: var(--black); }
+.nav-tab.active { background: var(--green-light,#E8F5E6); color: var(--green-dark); }
+.nav-tab .material-icons-round { font-size: 15px; }
+
+/* ── CLAIMS PAGE ── */
+.page-claims { max-width: 900px; margin: 0 auto; padding: 32px 20px 56px; display: none; }
+.page-claims.visible { display: block; }
+.page-shield.hidden { display: none; }
+
+.cl-header { margin-bottom: 28px; }
+.cl-title {
+  font-family: 'Barlow', sans-serif; font-size: 24px; font-weight: 800;
+  color: var(--black); letter-spacing: -0.03em; margin-bottom: 4px;
+}
+.cl-sub { font-size: 12px; color: var(--gray-40); }
+
+/* KPI grid */
+.kpi-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-bottom: 24px; }
+.kpi-card {
+  background: var(--white); border: 1px solid var(--gray-10);
+  border-radius: var(--radius); padding: 16px 16px;
+}
+.kpi-card-lbl {
+  font-family: 'Barlow', sans-serif; font-size: 9px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .09em; color: var(--gray-40);
+  margin-bottom: 6px;
+}
+.kpi-card-val {
+  font-family: 'Barlow', sans-serif; font-size: 26px; font-weight: 800;
+  letter-spacing: -0.03em; color: var(--black); line-height: 1;
+}
+.kpi-card-sub { font-size: 10px; color: var(--gray-40); margin-top: 4px; }
+.kpi-green .kpi-card-val { color: var(--green-dark,#2E7D32); }
+.kpi-red .kpi-card-val { color: #C62828; }
+.kpi-amber .kpi-card-val { color: #E65100; }
+
+/* Split layout */
+.cl-split { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+.cl-card {
+  background: var(--white); border: 1px solid var(--gray-10);
+  border-radius: var(--radius); padding: 18px 18px;
+}
+.cl-card-title {
+  font-family: 'Barlow', sans-serif; font-size: 9px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .09em; color: var(--gray-40);
+  margin-bottom: 14px;
+}
+
+/* Donut */
+.donut-wrap { display: flex; align-items: center; gap: 20px; }
+.donut-legend { display: flex; flex-direction: column; gap: 8px; }
+.legend-row { display: flex; align-items: center; gap: 8px; font-size: 12px; }
+.legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.legend-lbl { font-family: 'Poppins', sans-serif; font-size: 11px; color: var(--gray-60); }
+.legend-val { font-family: 'Barlow', sans-serif; font-size: 13px; font-weight: 700; color: var(--black); margin-left: auto; }
+
+/* Bar chart horizontal */
+.hbar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+.hbar-lbl {
+  font-family: 'Poppins', sans-serif; font-size: 10px; color: var(--gray-60);
+  width: 180px; flex-shrink: 0;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.hbar-wrap { flex: 1; height: 6px; background: var(--gray-10); border-radius: 3px; overflow: hidden; }
+.hbar-fill { height: 100%; border-radius: 3px; background: var(--green); }
+.hbar-val {
+  font-family: 'Barlow', sans-serif; font-size: 11px; font-weight: 700;
+  color: var(--black); width: 36px; text-align: right; flex-shrink: 0;
+}
+
+/* Monthly trend */
+.trend-bars { display: flex; align-items: flex-end; gap: 6px; height: 80px; margin-bottom: 6px; }
+.trend-bar-group { flex: 1; display: flex; gap: 2px; align-items: flex-end; }
+.trend-bar { flex: 1; border-radius: 2px 2px 0 0; transition: filter .15s; cursor: default; }
+.trend-labels { display: flex; gap: 6px; }
+.trend-lbl-m { flex: 1; text-align: center; font-family: 'Barlow', sans-serif; font-size: 9px; color: var(--gray-40); }
+
+/* Taxa card */
+.taxa-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.taxa-lbl { font-family: 'Poppins', sans-serif; font-size: 11px; color: var(--gray-60); flex: 1; }
+.taxa-pct { font-family: 'Barlow', sans-serif; font-size: 14px; font-weight: 800; width: 52px; text-align: right; }
+.taxa-bar-w { flex: 2; height: 8px; background: var(--gray-10); border-radius: 4px; overflow: hidden; }
+.taxa-bar-f { height: 100%; border-radius: 4px; }
+
+/* Full width card */
+.cl-full { background: var(--white); border: 1px solid var(--gray-10); border-radius: var(--radius); padding: 18px 18px; margin-bottom: 14px; }
+
+/* Claims fontes */
+.cl-fontes { text-align: center; margin-top: 20px; padding-top: 14px; border-top: 1px solid var(--gray-10); }
+.cl-fontes-lbl { font-family: 'Barlow', sans-serif; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .09em; color: var(--gray-20); display: block; margin-bottom: 4px; }
+.cl-fontes code { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 9.5px; color: var(--gray-20); }
+
+
+.kpi-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-bottom: 20px; }
+@media (max-width: 700px) { .kpi-grid { grid-template-columns: repeat(2,1fr); } }
+.kpi-card { background:var(--white); border:1px solid var(--gray-10); border-radius:var(--radius); padding:14px 16px; }
+.kpi-card-lbl { font-family:'Barlow',sans-serif; font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:.09em; color:var(--gray-40); margin-bottom:5px; }
+.kpi-card-val { font-family:'Barlow',sans-serif; font-size:22px; font-weight:800; letter-spacing:-0.03em; color:var(--black); line-height:1; }
+.kpi-card-sub { font-size:10px; color:var(--gray-40); margin-top:4px; }
+
+.cl-table { width:100%; border-collapse:collapse; font-family:'Poppins',sans-serif; font-size:11px; }
+.cl-table thead tr { background:var(--green); }
+.cl-table thead th { color:#fff; font-family:'Barlow',sans-serif; font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:.07em; padding:8px 10px; text-align:left; white-space:nowrap; }
+.cl-table tbody tr { border-bottom:1px solid var(--gray-10); transition:background .1s; }
+.cl-table tbody tr:hover { background:var(--green-light,#E8F5E6); }
+.cl-table td { padding:8px 10px; vertical-align:middle; color:var(--gray-80); }
+.cl-num { text-align:right; font-family:'Barlow',sans-serif; font-weight:600; white-space:nowrap; }
+.cl-val { color:var(--black); }
+.cl-val-big { color:#C62828; font-weight:800; }
+.cl-obs { font-size:10px; color:var(--gray-40); font-style:italic; max-width:200px; }
+
+.cl-badge { display:inline-block; padding:2px 7px; border-radius:4px; font-family:'Barlow',sans-serif; font-size:8px; font-weight:700; white-space:nowrap; }
+.cl-badge-tc       { background:#E3F2FD; color:#1565C0; }
+.cl-badge-warranty { background:#F3E5F5; color:#6A1B9A; }
+.cl-badge-pn       { background:#FFEBEE; color:#C62828; }
+.cl-badge-qualidade{ background:#FFF3E0; color:#E65100; }
+.cl-badge-defeito  { background:#E8F5E6; color:#2E7D32; }
+.cl-badge-negada   { background:#C62828; color:#fff; }
+.cl-badge-andamento{ background:#E65100; color:#fff; }
+
+
+/* ── CARD ACTION BUTTONS ── */
+.card-actions {
+  position: absolute;
+  top: 10px; right: 10px;
+  display: flex; gap: 4px;
+  opacity: 0;
+  transition: opacity .18s;
+  z-index: 10;
+}
+.cl-card { position: relative; }
+.cl-full { position: relative; }
+.cl-card, .cl-full, .kpi-card-wrap {
+  position: relative;
+}
+.cl-card:hover .card-actions,
+.cl-full:hover  .card-actions,
+.kpi-card-wrap:hover .card-actions { opacity: 1; }
+
+.card-action-btn {
+  display: flex; align-items: center; justify-content: center;
+  width: 26px; height: 26px;
+  background: rgba(255,255,255,.92);
+  border: 1px solid var(--gray-10);
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0,0,0,.08);
+  transition: background .12s, box-shadow .12s;
+  color: var(--gray-40);
+  font-size: 13px;
+}
+.card-action-btn:hover {
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,.14);
+  color: var(--black);
+}
+.card-action-btn .material-icons-round { font-size: 14px; }
+
+/* Toast de confirmação */
+.copy-toast {
+  position: fixed;
+  bottom: 28px; left: 50%;
+  transform: translateX(-50%) translateY(12px);
+  background: var(--black);
+  color: #fff;
+  font-family: 'Barlow', sans-serif;
+  font-size: 12px; font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 20px;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 999;
+  transition: opacity .2s, transform .2s;
+}
+.copy-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
 </style>
 </head>
 <body>
 
 <!-- ── TOP BAR ── -->
 <header class="topbar">
-  <span class="topbar-title">Camadas de Proteção de Qualidade</span>
+  <span class="topbar-title" style="font-family:'Barlow',sans-serif;font-size:14px;font-weight:700;color:var(--black);letter-spacing:-0.01em">Procurement &amp; Supply</span>
   <div class="topbar-sep"></div>
-  <span class="topbar-sub">Procurement &amp; Supply</span>
-  <span class="topbar-badge">Quality Shield</span>
+  <nav class="nav-tabs">
+    <button class="nav-tab active" id="tab-shield" onclick="showPage('shield')">
+      <span class="material-icons-round">shield</span>Quality Shield
+    </button>
+    <button class="nav-tab" id="tab-tc" onclick="showPage('tc')">
+      <span class="material-icons-round">local_shipping</span>Transit Claim
+    </button>
+    <button class="nav-tab" id="tab-warranty" onclick="showPage('warranty')">
+      <span class="material-icons-round">build_circle</span>Warranty
+    </button>
+  </nav>
 </header>
 
 <!-- ── OVERLAY / DRAWER ── -->
@@ -555,24 +808,24 @@ body {
 </div>
 
 <!-- ── MAIN ── -->
-<main class="page">
+<main class="page page-shield" id="page-shield">
 
   <div class="node-wrap"><div class="node">Estoque do fornecedor</div></div>
 
   <!-- scatter 0 — 10 dots -->
   <div class="scatter"><svg viewBox="0 0 860 52" preserveAspectRatio="none">
-    <circle cx="138" cy="15" r="5"   fill="#C04828" opacity=".8"/>
-    <circle cx="204" cy="34" r="3.5" fill="#9B6014" opacity=".65"/>
-    <circle cx="268" cy="11" r="6.5" fill="#A85030" opacity=".75"/>
-    <circle cx="338" cy="40" r="4"   fill="#CC7030" opacity=".6"/>
-    <circle cx="398" cy="19" r="5.5" fill="#C04828" opacity=".5"/>
-    <circle cx="456" cy="38" r="3.5" fill="#7A4018" opacity=".7"/>
-    <circle cx="516" cy="10" r="4.5" fill="#9B6014" opacity=".6"/>
-    <circle cx="584" cy="32" r="6.5" fill="#A04020" opacity=".65"/>
-    <circle cx="644" cy="17" r="4"   fill="#CC6030" opacity=".55"/>
-    <circle cx="706" cy="42" r="4.5" fill="#8B4513" opacity=".7"/>
-    <line x1="430" y1="46" x2="430" y2="51" stroke="#CCCCCC" stroke-width="1.4"/>
-    <path d="M427 48 L430 52 L433 48" fill="none" stroke="#CCCCCC" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="138" cy="15" r="5"   fill="#2E7D32" opacity=".8"/>
+    <circle cx="204" cy="34" r="3.5" fill="#4FAE45" opacity=".65"/>
+    <circle cx="268" cy="11" r="6.5" fill="#388E3C" opacity=".75"/>
+    <circle cx="338" cy="40" r="4"   fill="#66BB6A" opacity=".6"/>
+    <circle cx="398" cy="19" r="5.5" fill="#2E7D32" opacity=".5"/>
+    <circle cx="456" cy="38" r="3.5" fill="#1B5E20" opacity=".7"/>
+    <circle cx="516" cy="10" r="4.5" fill="#4FAE45" opacity=".6"/>
+    <circle cx="584" cy="32" r="6.5" fill="#81C784" opacity=".65"/>
+    <circle cx="644" cy="17" r="4"   fill="#A5D6A7" opacity=".55"/>
+    <circle cx="706" cy="42" r="4.5" fill="#43A047" opacity=".7"/>
+    <line x1="430" y1="38" x2="430" y2="50" stroke="#4FAE45" stroke-width="2"/>
+    <path d="M425 45 L430 52 L435 45" fill="none" stroke="#4FAE45" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
   </svg></div>
 
   <!-- L1 -->
@@ -590,16 +843,16 @@ body {
 
   <!-- scatter 1 — 8 dots -->
   <div class="scatter"><svg viewBox="0 0 860 52" preserveAspectRatio="none">
-    <circle cx="156" cy="30" r="4"   fill="#C04828" opacity=".7"/>
-    <circle cx="232" cy="12" r="5.5" fill="#9B6014" opacity=".6"/>
-    <circle cx="304" cy="40" r="3.5" fill="#A85030" opacity=".65"/>
-    <circle cx="384" cy="16" r="5"   fill="#CC7030" opacity=".55"/>
-    <circle cx="450" cy="36" r="3.5" fill="#7A4018" opacity=".75"/>
-    <circle cx="530" cy="10" r="6"   fill="#8B4513" opacity=".6"/>
-    <circle cx="606" cy="38" r="4"   fill="#A04020" opacity=".7"/>
-    <circle cx="676" cy="20" r="4.5" fill="#CC6030" opacity=".5"/>
-    <line x1="430" y1="46" x2="430" y2="51" stroke="#CCCCCC" stroke-width="1.4"/>
-    <path d="M427 48 L430 52 L433 48" fill="none" stroke="#CCCCCC" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="156" cy="30" r="4"   fill="#2E7D32" opacity=".7"/>
+    <circle cx="232" cy="12" r="5.5" fill="#4FAE45" opacity=".6"/>
+    <circle cx="304" cy="40" r="3.5" fill="#388E3C" opacity=".65"/>
+    <circle cx="384" cy="16" r="5"   fill="#66BB6A" opacity=".55"/>
+    <circle cx="450" cy="36" r="3.5" fill="#1B5E20" opacity=".75"/>
+    <circle cx="530" cy="10" r="6"   fill="#43A047" opacity=".6"/>
+    <circle cx="606" cy="38" r="4"   fill="#81C784" opacity=".7"/>
+    <circle cx="676" cy="20" r="4.5" fill="#A5D6A7" opacity=".5"/>
+    <line x1="430" y1="38" x2="430" y2="50" stroke="#4FAE45" stroke-width="2"/>
+    <path d="M425 45 L430 52 L435 45" fill="none" stroke="#4FAE45" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
   </svg></div>
 
   <!-- L2 -->
@@ -617,14 +870,14 @@ body {
 
   <!-- scatter 2 — 6 dots -->
   <div class="scatter"><svg viewBox="0 0 860 52" preserveAspectRatio="none">
-    <circle cx="184" cy="24" r="4.5" fill="#C04828" opacity=".65"/>
-    <circle cx="286" cy="40" r="4"   fill="#9B6014" opacity=".7"/>
-    <circle cx="372" cy="12" r="5.5" fill="#A85030" opacity=".6"/>
-    <circle cx="466" cy="38" r="3.5" fill="#7A4018" opacity=".65"/>
-    <circle cx="554" cy="16" r="5"   fill="#CC7030" opacity=".55"/>
-    <circle cx="642" cy="34" r="3.5" fill="#8B4513" opacity=".7"/>
-    <line x1="430" y1="46" x2="430" y2="51" stroke="#CCCCCC" stroke-width="1.4"/>
-    <path d="M427 48 L430 52 L433 48" fill="none" stroke="#CCCCCC" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="184" cy="24" r="4.5" fill="#2E7D32" opacity=".65"/>
+    <circle cx="286" cy="40" r="4"   fill="#4FAE45" opacity=".7"/>
+    <circle cx="372" cy="12" r="5.5" fill="#388E3C" opacity=".6"/>
+    <circle cx="466" cy="38" r="3.5" fill="#1B5E20" opacity=".65"/>
+    <circle cx="554" cy="16" r="5"   fill="#66BB6A" opacity=".55"/>
+    <circle cx="642" cy="34" r="3.5" fill="#43A047" opacity=".7"/>
+    <line x1="430" y1="38" x2="430" y2="50" stroke="#4FAE45" stroke-width="2"/>
+    <path d="M425 45 L430 52 L435 45" fill="none" stroke="#4FAE45" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
   </svg></div>
 
   <!-- L3 -->
@@ -636,7 +889,7 @@ body {
     </div>
     <div class="layer-clickable" onclick="openDrawer(3,'desc')">
       <div class="lb"><div class="lb-num">3</div>
-        <p class="lb-title">Inventário rotativo nos CDs</p>
+        <p class="lb-title">Inspeção rotativa nos CDs</p>
         <p class="lb-sub">Vistoria semanal em peças problemáticas no estoque</p>
         <span class="material-icons-round lb-chev">chevron_right</span>
       </div>
@@ -646,12 +899,12 @@ body {
 
   <!-- scatter 3 — 4 dots -->
   <div class="scatter"><svg viewBox="0 0 860 52" preserveAspectRatio="none">
-    <circle cx="232" cy="32" r="4.5" fill="#C04828" opacity=".7"/>
-    <circle cx="376" cy="14" r="4"   fill="#9B6014" opacity=".6"/>
-    <circle cx="496" cy="40" r="5"   fill="#A85030" opacity=".65"/>
-    <circle cx="620" cy="18" r="3.5" fill="#7A4018" opacity=".7"/>
-    <line x1="430" y1="46" x2="430" y2="51" stroke="#CCCCCC" stroke-width="1.4"/>
-    <path d="M427 48 L430 52 L433 48" fill="none" stroke="#CCCCCC" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="232" cy="32" r="4.5" fill="#2E7D32" opacity=".7"/>
+    <circle cx="376" cy="14" r="4"   fill="#4FAE45" opacity=".6"/>
+    <circle cx="496" cy="40" r="5"   fill="#388E3C" opacity=".65"/>
+    <circle cx="620" cy="18" r="3.5" fill="#1B5E20" opacity=".7"/>
+    <line x1="430" y1="38" x2="430" y2="50" stroke="#4FAE45" stroke-width="2"/>
+    <path d="M425 45 L430 52 L435 45" fill="none" stroke="#4FAE45" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
   </svg></div>
 
   <!-- L4 -->
@@ -667,19 +920,11 @@ body {
         <p class="lb-sub">Coleta de evidências + abertura automática de claim</p>
         <span class="material-icons-round lb-chev">chevron_right</span>
       </div>
-      <div class="cb"><p class="cb-lbl">O QUE CAPTURA</p><p class="cb-val">Nenhuma perda sem claim</p></div>
+      <div class="cb"><p class="cb-lbl">O QUE CAPTURA</p><p class="cb-val">Peças Não-Conformes nas filiais</p></div>
     </div>
   </div>
 
-  <!-- arrow final -->
-  <div class="arrow-wrap">
-    <svg width="12" height="24" viewBox="0 0 12 24">
-      <line x1="6" y1="0" x2="6" y2="17" stroke="#CCCCCC" stroke-width="1.4"/>
-      <path d="M3 13 L6 18 L9 13" fill="none" stroke="#CCCCCC" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </div>
 
-  <div class="node-wrap"><div class="node node-final">Claim submetida — portal TVS</div></div>
 
   <div class="bottom">
     <div class="chips">
@@ -687,13 +932,19 @@ body {
         <div class="chip-lbl">Total NC identificado (L3 + L4)</div>
         <div class="chip-val" id="chip-total">R$ 119.953,81</div>
       </div>
-      <div class="chip">
-        <div class="chip-lbl">L1 + L2</div>
-        <div class="chip-val">Sem dados ainda</div>
+    </div>
+    <p class="footer-txt">Quanto mais cedo capturado, mais forte a evidência, menor o impacto operacional e maior a chance de aprovação</p>
+    <p class="updated" id="badge-atualizado"></p>
+    <div class="fontes">
+      <span class="fontes-lbl">Fontes BigQuery</span>
+      <div class="fontes-list">
+        <div class="fontes-row"><span class="fontes-tag">L3</span><code>z_ren_homologacao.inventario_rotativo</code></div>
+        <div class="fontes-row"><span class="fontes-tag">L3</span><code>spc_estoque.posicao_endereco_historico</code></div>
+        <div class="fontes-row"><span class="fontes-tag">L4</span><code>spc_compras.descarte_intercom</code></div>
+        <div class="fontes-row"><span class="fontes-tag">L4</span><code>spc_estoque.cadastro_item</code></div>
+        <div class="fontes-row"><span class="fontes-tag">L3·L4</span><code>spc_estoque.estoque_recebimentos</code></div>
       </div>
     </div>
-    <p class="footer-txt">Quanto mais cedo capturado, mais forte a evidência e maior a chance de aprovação</p>
-    <p class="updated" id="badge-atualizado"></p>
   </div>
 
 </main>
@@ -824,9 +1075,9 @@ function renderChart(ts){
 }
 
 var TS = {
-  l3: { label:'Ajustes negativos nos CDs', unit:'itens', note:'Abr/26 parcial',
-    data:[{m:'Jan/25',v:37737},{m:'Fev/25',v:82509},{m:'Mar/25',v:554147},{m:'Abr/25',v:367173},{m:'Mai/25',v:82690},{m:'Jun/25',v:1102457},{m:'Jul/25',v:64001},{m:'Ago/25',v:104250},{m:'Set/25',v:178792},{m:'Out/25',v:307858},{m:'Nov/25',v:90875},{m:'Dez/25',v:291048},{m:'Jan/26',v:167996},{m:'Fev/26',v:172775},{m:'Mar/26',v:184266},{m:'Abr/26',v:22197,partial:true}]},
-  l4: { label:'Valor descartado nas filiais (R$)', unit:'R$', note:'Abr/26 parcial',
+  l3: { label:'Valor de NC identificados nos CDs — inventário rotativo (R$)', unit:'R$', note:'Abr/26 parcial',
+    data:[{m:'Mai/25',v:63433.68},{m:'Jun/25',v:548949.28},{m:'Jul/25',v:9639.22},{m:'Ago/25',v:407417.77},{m:'Set/25',v:804503.59},{m:'Out/25',v:66482.38},{m:'Nov/25',v:24833.43},{m:'Dez/25',v:425562.57},{m:'Jan/26',v:220984.48},{m:'Fev/26',v:921073.81},{m:'Mar/26',v:405474.69},{m:'Abr/26',v:103495.92,partial:true}]},
+  l4: { label:'Valor descartado nas filiais (R$)', unit:'R$', note:'Abr/26 parcial — fonte: descarte_intercom × estoque_recebimentos',
     data:[{m:'Jul/25',v:2201.44},{m:'Ago/25',v:4982.66},{m:'Set/25',v:14463.1},{m:'Out/25',v:16672.51},{m:'Nov/25',v:9210.27},{m:'Dez/25',v:10925.35},{m:'Jan/26',v:6622.58},{m:'Fev/26',v:6338.67},{m:'Mar/26',v:4219.11},{m:'Abr/26',v:1754.34,partial:true}]}
 };
 function fmtN(v){if(v>=1000000)return(v/1000000).toFixed(1)+'M';if(v>=1000)return(v/1000).toFixed(0)+'K';return String(v);}
@@ -859,7 +1110,7 @@ var DATA = {
   2:{bg:'rgba(79,174,69,.70)',t:'Inspeção no recebimento (CDs)',values:null,
     desc:`<div><div class="d-sec">O que captura</div><div class="desc-card"><strong>Avarias e divergências na entrada</strong>Peças com dano físico, código incorreto ou divergência de quantidade são bloqueadas no recebimento, antes de entrar no estoque ativo.</div></div><div><div class="d-sec">Como funciona</div><div class="desc-card"><strong>Checklist na doca</strong>O operador registra cada NC: avaria, código errado, quantidade divergente, lote sem rastreabilidade. Item vai para quarentena e gera apontamento para claim.</div></div><div><div class="d-sec">Diferença para o L3</div><div class="desc-card"><strong>Entrada vs. Inventário</strong>L2 age no momento da descarga. L3 age no estoque já armazenado, capturando problemas que surgiram após o recebimento.</div></div><div class="coming"><span class="material-icons-round">schedule</span>Dados em construção</div>`
   },
-  3:{bg:'#3A9934',t:'Inventário rotativo nos CDs',
+  3:{bg:'#3A9934',t:'Inspeção rotativa nos CDs',
     values:`<div><div class="d-sec">Resumo do ciclo</div><div class="kpi-row"><div class="kpi"><div class="kpi-lbl">Valor NC</div><div class="kpi-val" id="d3v">R$ 42,56K</div><div class="kpi-hint" id="d3r">estoque 09/02</div></div><div class="kpi"><div class="kpi-lbl">Itens NC</div><div class="kpi-val" id="d3q">2.319</div><div class="kpi-hint">não-conformes</div></div><div class="kpi"><div class="kpi-lbl">CDs</div><div class="kpi-val">3</div><div class="kpi-hint">PE · SC · SP</div></div></div></div><div><div class="d-sec">Top peças por valor</div><table class="d-table"><thead><tr><th>Peça</th><th>CD</th><th>Qtd</th><th>Valor</th></tr></thead><tbody id="d3t"><tr><td>Carenagem Farol Preto<div class="bar-wrap"><div class="bar-fill" style="width:95%"></div></div></td><td><span class="cd cd-sp">SP</span><span class="cd cd-sc">SC</span><span class="cd cd-pe">PE</span></td><td>80</td><td>R$40.244</td></tr><tr><td>Arruela Externa Eixo Traseiro<div class="bar-wrap"><div class="bar-fill" style="width:12%"></div></div></td><td><span class="cd cd-sc">SC</span></td><td>1.340</td><td>R$1.313</td></tr><tr><td>Porca Sextavada M10<div class="bar-wrap"><div class="bar-fill" style="width:8%"></div></div></td><td><span class="cd cd-sp">SP</span></td><td>722</td><td>R$729</td></tr><tr><td>Cavalete Lateral<div class="bar-wrap"><div class="bar-fill" style="width:1%"></div></div></td><td><span class="cd cd-pe">PE</span></td><td>10</td><td>R$151</td></tr><tr><td>Parafuso Allen 8×27<div class="bar-wrap"><div class="bar-fill" style="width:1%"></div></div></td><td><span class="cd cd-sc">SC</span></td><td>100</td><td>R$54</td></tr></tbody></table></div><div><div class="d-sec">Taxa NC — Carenagem por CD</div><table class="d-table"><thead><tr><th>CD</th><th>Insp.</th><th>NC</th><th>Taxa</th><th>Estoque</th></tr></thead><tbody><tr><td><span class="cd cd-sp">CD-SP</span></td><td>81</td><td>62</td><td>76,5%<div class="bar-wrap"><div class="bar-fill bar-red" style="width:77%"></div></div></td><td>86 un</td></tr><tr><td><span class="cd cd-pe">CD-PE</span></td><td>11</td><td>8</td><td>72,7%<div class="bar-wrap"><div class="bar-fill bar-red" style="width:73%"></div></div></td><td>2.850 un</td></tr><tr><td><span class="cd cd-sc">CD-SC</span></td><td>52</td><td>10</td><td>19,2%<div class="bar-wrap"><div class="bar-fill bar-amber" style="width:19%"></div></div></td><td>538 un</td></tr></tbody></table></div><div><div class="info-box">Carenagem extrapolada ao estoque de 09/02 (3.474 un · R$17,95/un) pela taxa NC amostral por CD. <strong>ELETRIC SAI</strong> (63 un, CD-PE) sem preço de referência.</div></div><div>${renderChart(TS.l3)}</div>`,
     desc:`<div><div class="d-sec">O que captura</div><div class="desc-card"><strong>Problemas pós-recebimento</strong>Defeitos latentes, danos de manuseio, itens misturados ou fora de especificação — identificados na vistoria periódica do estoque já armazenado.</div></div><div><div class="d-sec">Como funciona</div><div class="desc-card"><strong>Vistoria semanal em SKUs críticos</strong>A cada ciclo, SKUs com histórico de defeito são inspecionados fisicamente no endereço de armazenamento, com foto e descrição como evidência rastreável.</div></div><div><div class="d-sec">Critério de seleção</div><div class="desc-card"><strong>Histórico + incidência</strong>SKUs entram na lista quando aparecem no BI de descarte, têm reclamações das filiais ou fazem parte de lotes suspeitos do fornecedor.</div></div>`
   },
@@ -893,8 +1144,8 @@ Preço calculado pela média dos <strong>3 últimos recebimentos</strong> de cad
     Mapeamento manual em andamento — valor atual está <strong>subestimado</strong>.
   </div>
 </div>
-</div><div>${renderChart(TS.l4)}</div>`,
-    desc:`<div><div class="d-sec">O que captura</div><div class="desc-card"><strong>Nenhuma perda sem claim</strong>Último recurso: peças defeituosas que chegaram à filial. Meta é garantir 100% dos descartes elegíveis virem claim aberto no portal TVS.</div></div><div><div class="d-sec">Como funciona</div><div class="desc-card"><strong>Guia o mecânico nas evidências</strong>Ao identificar a peça defeituosa, o AI Agent conduz o mecânico: foto da peça, foto da rastreabilidade, descrição — e abre o claim automaticamente.</div></div><div><div class="d-sec">Por que é o último recurso</div><div class="desc-card"><strong>Custo alto, evidência fraca</strong>Peça que chega à filial já gerou frete e armazenagem. A evidência de defeito fica mais difícil após instalação. Por isso L1–L3 precisam funcionar bem para reduzir a pressão aqui.</div></div>`
+</div><div class=\"drawer-fontes\"><span class=\"df-lbl\">Fontes</span><code>spc_compras.descarte_intercom</code><span class=\"df-sep\">·</span><code>spc_estoque.cadastro_item</code><span class=\"df-sep\">·</span><code>spc_estoque.estoque_recebimentos</code></div><div>${renderChart(TS.l4)}</div>`,
+    desc:`<div><div class="d-sec">O que captura</div><div class="desc-card"><strong>Peças Não-Conformes nas filiais</strong>Último recurso: peças defeituosas que chegaram à filial. Meta é garantir 100% dos descartes elegíveis virem claim aberto no portal TVS.</div></div><div><div class="d-sec">Como funciona</div><div class="desc-card"><strong>Guia o mecânico nas evidências</strong>Ao identificar a peça defeituosa, o AI Agent conduz o mecânico: foto da peça, foto da rastreabilidade, descrição — e abre o claim automaticamente.</div></div><div><div class="d-sec">Por que é o último recurso</div><div class="desc-card"><strong>Custo alto, evidência fraca</strong>Peça que chega à filial já gerou frete e armazenagem. A evidência de defeito fica mais difícil após instalação. Por isso L1–L3 precisam funcionar bem para reduzir a pressão aqui.</div></div>`
   }
 };
 
@@ -1100,6 +1351,546 @@ document.head.appendChild(s);
     <div id="chart-modal-body"></div>
   </div>
 </div>
+
+
+<!-- ── TRANSIT CLAIM PAGE ── -->
+<div class="page-claims" id="page-tc">
+
+  <div class="cl-header">
+    <h1 class="cl-title">Transit Claim — TVS Motor Company</h1>
+    <p class="cl-sub">Divergências em trânsito · Valores em USD · <code>Book.xlsx</code></p>
+  </div>
+
+  <!-- KPIs -->
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-card-lbl">Total de Claims</div>
+      <div class="kpi-card-val">7</div>
+      <div class="kpi-card-sub">transit claims</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-card-lbl">Valor Total (USD)</div>
+      <div class="kpi-card-val">$46,72K</div>
+      <div class="kpi-card-sub">valor reclamado</div>
+    </div>
+    <div class="kpi-card" style="border-left:3px solid #C62828">
+      <div class="kpi-card-lbl">Negadas</div>
+      <div class="kpi-card-val" style="color:#C62828">5</div>
+      <div class="kpi-card-sub">$46,16K · 98,8%</div>
+    </div>
+    <div class="kpi-card" style="border-left:3px solid #E65100">
+      <div class="kpi-card-lbl">Em Andamento</div>
+      <div class="kpi-card-val" style="color:#E65100">3</div>
+      <div class="kpi-card-sub">$560 · Tanque + Cavalete</div>
+    </div>
+  </div>
+
+  <!-- Split -->
+  <div class="cl-split">
+    <div class="cl-card">
+      <div class="cl-card-title">Por tipo de problema</div>
+      <div class="taxa-row">
+        <span class="taxa-lbl">Mismatch</span>
+        <div class="taxa-bar-w"><div class="taxa-bar-f" style="width:99%;background:#C62828"></div></div>
+        <span class="taxa-pct" style="color:#C62828">$46,16K</span>
+      </div>
+      <div style="font-size:10px;color:var(--gray-40);margin-bottom:14px">5 claims · 12.507 peças · Chicote principal + Bobina</div>
+      <div class="taxa-row">
+        <span class="taxa-lbl">Defective</span>
+        <div class="taxa-bar-w"><div class="taxa-bar-f" style="width:1.2%;background:#4FAE45"></div></div>
+        <span class="taxa-pct" style="color:#2E7D32">$560</span>
+      </div>
+      <div style="font-size:10px;color:var(--gray-40)">2 claims · 25 peças · Tanque de combustível</div>
+    </div>
+    <div class="cl-card">
+      <div class="cl-card-title">Por status</div>
+      <div class="taxa-row">
+        <span class="taxa-lbl">✗ Negada</span>
+        <div class="taxa-bar-w"><div class="taxa-bar-f" style="width:99%;background:#C62828"></div></div>
+        <span class="taxa-pct" style="color:#C62828">5</span>
+      </div>
+      <div style="font-size:10px;color:var(--gray-40);margin-bottom:10px">$46.162,78</div>
+      <div class="taxa-row">
+        <span class="taxa-lbl">⏳ Aguard. Portal</span>
+        <div class="taxa-bar-w"><div class="taxa-bar-f" style="width:14.3%;background:#E65100"></div></div>
+        <span class="taxa-pct" style="color:#E65100">1</span>
+      </div>
+      <div style="font-size:10px;color:var(--gray-40);margin-bottom:10px">$537,60</div>
+      <div class="taxa-row">
+        <span class="taxa-lbl">⏳ Em Análise</span>
+        <div class="taxa-bar-w"><div class="taxa-bar-f" style="width:14.3%;background:#E65100"></div></div>
+        <span class="taxa-pct" style="color:#E65100">1</span>
+      </div>
+      <div style="font-size:10px;color:var(--gray-40)">$22,40</div>
+    </div>
+  </div>
+
+  <!-- Tabela TC -->
+  <div class="cl-full">
+    <div class="cl-card-title">Detalhamento — Transit Claims</div>
+    <div style="overflow-x:auto">
+      <table class="cl-table">
+        <thead>
+          <tr><th>Peça</th><th>Problema</th><th>Status</th><th>Qtd</th><th>Valor (USD)</th><th>Cycle</th><th>OBS</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>CHICOTE PRINCIPAL COMPLETO — ND161010</td>
+            <td><span class="cl-badge cl-badge-pn">Mismatch</span></td>
+            <td><span class="cl-badge cl-badge-negada">✗ Negada</span></td>
+            <td class="cl-num">950</td>
+            <td class="cl-num cl-val cl-val-big">$23.246,50</td>
+            <td class="cl-num">34d</td>
+            <td class="cl-obs">Informações incompletas</td>
+          </tr>
+          <tr>
+            <td>CHICOTE DA BOBINA — N6160250 <span style="font-size:9px;color:var(--gray-40)">(inv. 9,2E+07)</span></td>
+            <td><span class="cl-badge cl-badge-pn">Mismatch</span></td>
+            <td><span class="cl-badge cl-badge-negada">✗ Negada</span></td>
+            <td class="cl-num">3.622</td>
+            <td class="cl-num cl-val">$7.182,04</td>
+            <td class="cl-num">2d</td>
+            <td class="cl-obs">Informações incompletas</td>
+          </tr>
+          <tr>
+            <td>CHICOTE DA BOBINA — N6160250 <span style="font-size:9px;color:var(--gray-40)">(inv. 9,2E+07)</span></td>
+            <td><span class="cl-badge cl-badge-pn">Mismatch</span></td>
+            <td><span class="cl-badge cl-badge-negada">✗ Negada</span></td>
+            <td class="cl-num">3.540</td>
+            <td class="cl-num cl-val">$7.019,44</td>
+            <td class="cl-num">2d</td>
+            <td class="cl-obs">Informações incompletas</td>
+          </tr>
+          <tr>
+            <td>CHICOTE DA BOBINA — N6160250 <span style="font-size:9px;color:var(--gray-40)">(inv. 9,2E+07)</span></td>
+            <td><span class="cl-badge cl-badge-pn">Mismatch</span></td>
+            <td><span class="cl-badge cl-badge-negada">✗ Negada</span></td>
+            <td class="cl-num">2.995</td>
+            <td class="cl-num cl-val">$5.938,76</td>
+            <td class="cl-num">2d</td>
+            <td class="cl-obs">Informações incompletas</td>
+          </tr>
+          <tr>
+            <td>CHICOTE DA BOBINA — N6160250 <span style="font-size:9px;color:var(--gray-40)">(inv. 9,2E+07)</span></td>
+            <td><span class="cl-badge cl-badge-pn">Mismatch</span></td>
+            <td><span class="cl-badge cl-badge-negada">✗ Negada</span></td>
+            <td class="cl-num">1.400</td>
+            <td class="cl-num cl-val">$2.776,04</td>
+            <td class="cl-num">2d</td>
+            <td class="cl-obs">Informações incompletas</td>
+          </tr>
+          <tr style="background:#FFF8E1">
+            <td>TANQUE DE COMBUSTIVEL PRETO — ND1402594D</td>
+            <td><span class="cl-badge cl-badge-defeito">Defective</span></td>
+            <td><span class="cl-badge cl-badge-andamento">⏳ Aguard. Portal</span></td>
+            <td class="cl-num">24</td>
+            <td class="cl-num cl-val">$537,60</td>
+            <td class="cl-num">—</td>
+            <td class="cl-obs">Verificar evidências</td>
+          </tr>
+          <tr style="background:#FFF8E1">
+            <td>TANQUE DE COMBUSTIVEL PRETO — ND1402594D</td>
+            <td><span class="cl-badge cl-badge-defeito">Defective</span></td>
+            <td><span class="cl-badge cl-badge-andamento">⏳ Em Análise</span></td>
+            <td class="cl-num">1</td>
+            <td class="cl-num cl-val">$22,40</td>
+            <td class="cl-num">1d</td>
+            <td class="cl-obs">BR/2026/70997-01139</td>
+          </tr>
+          <tr style="background:#E8F5E6">
+            <td>CAVALETE LATERAL — N6121290</td>
+            <td><span class="cl-badge cl-badge-pn">Mismatch</span></td>
+            <td><span class="cl-badge" style="background:#E8F5E6;color:#2E7D32">📦 Aguard. Recebimento</span></td>
+            <td class="cl-num">19</td>
+            <td class="cl-num cl-val">$36,40</td>
+            <td class="cl-num">—</td>
+            <td class="cl-obs">R$9,54/un · USD 4,97 · Aguardando nova carga</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <!-- Gráfico temporal -->
+  <div class="cl-full" style="margin-top:14px">
+    <div class="cl-card-title">Evolução de Claims por Mês (USD)</div>
+
+    <!-- Legenda -->
+    <div style="margin-bottom:14px;display:flex;gap:18px;flex-wrap:wrap">
+      <span style="display:flex;align-items:center;gap:5px;font-size:10px;font-family:'Barlow',sans-serif;color:var(--gray-60)">
+        <span style="display:inline-block;width:10px;height:10px;background:#C62828;border-radius:2px"></span>Negada
+      </span>
+      <span style="display:flex;align-items:center;gap:5px;font-size:10px;font-family:'Barlow',sans-serif;color:var(--gray-60)">
+        <span style="display:inline-block;width:10px;height:10px;background:#E65100;border-radius:2px"></span>Em andamento
+      </span>
+      <span style="display:flex;align-items:center;gap:5px;font-size:10px;font-family:'Barlow',sans-serif;color:var(--gray-60)">
+        <span style="display:inline-block;width:10px;height:10px;background:#4FAE45;border-radius:2px"></span>Aceita
+      </span>
+    </div>
+
+    <!-- Barras -->
+    <div style="display:flex;align-items:flex-end;gap:10px;height:210px;position:relative;padding-top:24px">
+
+      <!-- Grid lines (só horizontal, sem labels) -->
+      <div style="position:absolute;left:0;right:0;top:24px;height:180px;pointer-events:none">
+        <div style="position:absolute;left:0;right:0;top:0;border-top:1px dashed #EEEEEE"></div>
+        <div style="position:absolute;left:0;right:0;top:25%;border-top:1px dashed #EEEEEE"></div>
+        <div style="position:absolute;left:0;right:0;top:50%;border-top:1px dashed #EEEEEE"></div>
+        <div style="position:absolute;left:0;right:0;top:75%;border-top:1px dashed #EEEEEE"></div>
+      </div>
+
+      <!-- DEZ/25: $228 negada -->
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;position:relative;z-index:1">
+        <div style="width:100%;position:relative">
+          <div style="width:100%;height:2px;background:#C62828;border-radius:3px 3px 0 0;display:flex;align-items:flex-start;justify-content:center;padding-top:2px">
+            <span style="font-size:7px;font-weight:700;color:rgba(255,255,255,.9);font-family:Barlow,sans-serif;white-space:nowrap">$229</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- JAN/26: sem claims -->
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;position:relative;z-index:1">
+        <div style="width:100%;height:2px;background:#EEEEEE;border-radius:2px"></div>
+      </div>
+
+      <!-- FEV/26: $3.652 negada (warranty) + $46.185 negada (TC) + $22 em análise (TC) -->
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;position:relative;z-index:1">
+        <div style="width:100%;position:relative">
+          <!-- Em análise: $22 (topo) -->
+          <div style="width:100%;height:8px;background:#E65100;border-radius:3px 3px 0 0;display:flex;align-items:center;justify-content:center">
+            <span style="font-size:6px;font-weight:700;color:#fff;font-family:Barlow,sans-serif">$22</span>
+          </div>
+          <!-- Negada TC: $46.185 -->
+          <div style="width:100%;height:166px;background:#C62828;display:flex;align-items:flex-start;justify-content:center;padding-top:3px">
+            <span style="font-size:8px;font-weight:700;color:rgba(255,255,255,.9);font-family:Barlow,sans-serif;white-space:nowrap">$46,2K</span>
+          </div>
+          <!-- Negada Warranty: $3.652 (base) -->
+          <div style="width:100%;height:13px;background:#B71C1C;border-radius:0">
+          </div>
+        </div>
+      </div>
+
+      <!-- MAR/26: $10.787 negada (warranty) + $537 em andamento (TC portal) -->
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;position:relative;z-index:1">
+        <div style="width:100%;position:relative">
+          <!-- Em andamento: $537 (topo) -->
+          <div style="width:100%;height:2px;background:#E65100;border-radius:3px 3px 0 0;display:flex;align-items:flex-start;justify-content:center;padding-top:2px">
+            <span style="font-size:7px;font-weight:700;color:#fff;font-family:Barlow,sans-serif;white-space:nowrap">$537</span>
+          </div>
+          <!-- Negada: $10.787 -->
+          <div style="width:100%;height:39px;background:#C62828;border-radius:0;display:flex;align-items:flex-start;justify-content:center;padding-top:3px">
+            <span style="font-size:8px;font-weight:700;color:rgba(255,255,255,.9);font-family:Barlow,sans-serif;white-space:nowrap">$10,8K</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PENDENTE: $36 em andamento (cavalete) -->
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;position:relative;z-index:1;opacity:.65">
+        <div style="width:100%;position:relative">
+          <div style="width:100%;height:14px;background:#E65100;border-radius:3px 3px 0 0;border:1px dashed rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center">
+            <span style="font-size:7px;font-weight:700;color:#fff;font-family:Barlow,sans-serif">$36</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Labels dos meses -->
+    <div style="display:flex;gap:10px;margin-top:6px">
+      <div style="flex:1;text-align:center;font-family:'Barlow',sans-serif;font-size:10px;color:#AAAAAA">Dez/25</div>
+      <div style="flex:1;text-align:center;font-family:'Barlow',sans-serif;font-size:10px;color:#AAAAAA">Jan/26</div>
+      <div style="flex:1;text-align:center;font-family:'Barlow',sans-serif;font-size:10px;font-weight:700;color:#C62828">Fev/26</div>
+      <div style="flex:1;text-align:center;font-family:'Barlow',sans-serif;font-size:10px;color:#AAAAAA">Mar/26</div>
+      <div style="flex:1;text-align:center;font-family:'Barlow',sans-serif;font-size:10px;color:#AAAAAA;opacity:.65">Pendente</div>
+    </div>
+
+    <div style="margin-top:12px;font-size:10px;color:var(--gray-40);font-family:'Poppins',sans-serif;line-height:1.6">
+      Pico em Fev/26: 5 Transit Claims simultâneos totalizando <strong style="color:#C62828">$46,2K negados</strong> + $3,7K de Warranty. Barras mais escuras = camadas do mesmo mês.
+    </div>
+  </div>
+
+  <div class="cl-fontes">
+    <span class="cl-fontes-lbl">Fonte</span>
+    <code>Book.xlsx — Planilha1 + Viz Semanal · tipo = Transit Claim</code>
+  </div>
+</div>
+
+<!-- ── WARRANTY PAGE ── -->
+<div class="page-claims" id="page-warranty">
+
+  <div class="cl-header">
+    <h1 class="cl-title">Warranty — TVS Motor Company</h1>
+    <p class="cl-sub">Garantia de peças e componentes · Valores em USD · <code>Book.xlsx</code></p>
+  </div>
+
+  <!-- KPIs -->
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-card-lbl">Total de Claims</div>
+      <div class="kpi-card-val">4</div>
+      <div class="kpi-card-sub">warranty claims</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-card-lbl">Valor Total (USD)</div>
+      <div class="kpi-card-val">$14,67K</div>
+      <div class="kpi-card-sub">valor reclamado</div>
+    </div>
+    <div class="kpi-card" style="border-left:3px solid #C62828">
+      <div class="kpi-card-lbl">Negadas</div>
+      <div class="kpi-card-val" style="color:#C62828">4</div>
+      <div class="kpi-card-sub">$14,67K · 100%</div>
+    </div>
+    <div class="kpi-card" style="border-left:3px solid #2E7D32">
+      <div class="kpi-card-lbl">Cycle Time Médio</div>
+      <div class="kpi-card-val" style="color:#2E7D32">40d</div>
+      <div class="kpi-card-sub">da abertura ao fechamento</div>
+    </div>
+  </div>
+
+  <!-- Split -->
+  <div class="cl-split">
+    <div class="cl-card">
+      <div class="cl-card-title">Por peça — valor reclamado</div>
+      <div class="hbar-row">
+        <span class="hbar-lbl">Roda Traseira — N5112230</span>
+        <div class="hbar-wrap"><div class="hbar-fill" style="width:100%;background:#6A1B9A"></div></div>
+        <span class="hbar-val" style="color:#6A1B9A">$10,79K</span>
+      </div>
+      <div class="hbar-row">
+        <span class="hbar-lbl">Carcaça Motor LE — NA030260</span>
+        <div class="hbar-wrap"><div class="hbar-fill" style="width:26%;background:#6A1B9A"></div></div>
+        <span class="hbar-val" style="color:#6A1B9A">$2,78K</span>
+      </div>
+      <div class="hbar-row">
+        <span class="hbar-lbl">Chassi Aço Principal — ND120800</span>
+        <div class="hbar-wrap"><div class="hbar-fill" style="width:8%;background:#6A1B9A"></div></div>
+        <span class="hbar-val" style="color:#6A1B9A">$871</span>
+      </div>
+      <div class="hbar-row">
+        <span class="hbar-lbl">Campana Embreagem — N6080360</span>
+        <div class="hbar-wrap"><div class="hbar-fill" style="width:2%;background:#6A1B9A"></div></div>
+        <span class="hbar-val" style="color:#6A1B9A">$229</span>
+      </div>
+    </div>
+    <div class="cl-card">
+      <div class="cl-card-title">Motivos de negação</div>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:4px">
+        <div style="background:#FFEBEE;border-radius:6px;padding:10px 12px">
+          <div style="font-family:'Barlow',sans-serif;font-size:10px;font-weight:700;color:#C62828;margin-bottom:3px">Fora do prazo</div>
+          <div style="font-size:11px;color:#555">Roda Traseira — 501 un · $10.786,53</div>
+        </div>
+        <div style="background:#FFEBEE;border-radius:6px;padding:10px 12px">
+          <div style="font-family:'Barlow',sans-serif;font-size:10px;font-weight:700;color:#C62828;margin-bottom:3px">Abaixo do limite (2%)</div>
+          <div style="font-size:11px;color:#555">Carcaça Motor — 193 un · $2.781,13</div>
+        </div>
+        <div style="background:#FFEBEE;border-radius:6px;padding:10px 12px">
+          <div style="font-family:'Barlow',sans-serif;font-size:10px;font-weight:700;color:#C62828;margin-bottom:3px">Não contemplada</div>
+          <div style="font-size:11px;color:#555">Chassi Aço — 30 un · $871,20</div>
+        </div>
+        <div style="background:#FFEBEE;border-radius:6px;padding:10px 12px">
+          <div style="font-family:'Barlow',sans-serif;font-size:10px;font-weight:700;color:#C62828;margin-bottom:3px">Peça modificada</div>
+          <div style="font-size:11px;color:#555">Campana Embreagem — 22 un · $228,80</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabela Warranty -->
+  <div class="cl-full">
+    <div class="cl-card-title">Detalhamento — Warranty</div>
+    <div style="overflow-x:auto">
+      <table class="cl-table">
+        <thead>
+          <tr><th>Peça</th><th>Problema</th><th>Status</th><th>Qtd</th><th>Valor (USD)</th><th>Cycle</th><th>Motivo Negação</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>RODA TRASEIRA SEM PNEU — N5112230</td>
+            <td><span class="cl-badge cl-badge-qualidade">Qualidade</span></td>
+            <td><span class="cl-badge cl-badge-negada">✗ Negada</span></td>
+            <td class="cl-num">501</td>
+            <td class="cl-num cl-val cl-val-big">$10.786,53</td>
+            <td class="cl-num">21d</td>
+            <td class="cl-obs">Fora do prazo</td>
+          </tr>
+          <tr>
+            <td>CARCACA DO MOTOR LE — NA030260</td>
+            <td><span class="cl-badge cl-badge-qualidade">Qualidade</span></td>
+            <td><span class="cl-badge cl-badge-negada">✗ Negada</span></td>
+            <td class="cl-num">193</td>
+            <td class="cl-num cl-val">$2.781,13</td>
+            <td class="cl-num">34d</td>
+            <td class="cl-obs">Abaixo de 2% (limite)</td>
+          </tr>
+          <tr>
+            <td>CHASSI DE AÇO PRINCIPAL PRETO — ND120800</td>
+            <td><span class="cl-badge cl-badge-qualidade">Qualidade</span></td>
+            <td><span class="cl-badge cl-badge-negada">✗ Negada</span></td>
+            <td class="cl-num">30</td>
+            <td class="cl-num cl-val">$871,20</td>
+            <td class="cl-num">2d</td>
+            <td class="cl-obs">Não contemplada</td>
+          </tr>
+          <tr>
+            <td>CAMPANA DA EMBREAGEM — N6080360</td>
+            <td><span class="cl-badge cl-badge-qualidade">Qualidade</span></td>
+            <td><span class="cl-badge cl-badge-negada">✗ Negada</span></td>
+            <td class="cl-num">22</td>
+            <td class="cl-num cl-val">$228,80</td>
+            <td class="cl-num">104d</td>
+            <td class="cl-obs">Peça modificada</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="cl-fontes">
+    <span class="cl-fontes-lbl">Fonte</span>
+    <code>Book.xlsx — Planilha1 · tipo = Warranty</code>
+  </div>
+</div>
+
+<script>
+function showPage(page) {
+  var pages = ['shield','tc','warranty'];
+  var tabs  = ['tab-shield','tab-tc','tab-warranty'];
+  // Esconde tudo
+  document.getElementById('page-shield').classList.add('hidden');
+  var ptc = document.getElementById('page-tc');
+  var pw  = document.getElementById('page-warranty');
+  if(ptc) ptc.classList.remove('visible');
+  if(pw)  pw.classList.remove('visible');
+  tabs.forEach(function(t){ var el=document.getElementById(t); if(el) el.classList.remove('active'); });
+  // Mostra selecionado
+  if(page === 'shield'){
+    document.getElementById('page-shield').classList.remove('hidden');
+    document.getElementById('tab-shield').classList.add('active');
+  } else if(page === 'tc'){
+    if(ptc) ptc.classList.add('visible');
+    document.getElementById('tab-tc').classList.add('active');
+  } else if(page === 'warranty'){
+    if(pw) pw.classList.add('visible');
+    document.getElementById('tab-warranty').classList.add('active');
+  }
+}
+
+
+// ── CARD ACTIONS ──────────────────────────────────────────────
+(function() {
+  var s = document.createElement('script');
+  s.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+  document.head.appendChild(s);
+
+  window.showToast = function(msg) {
+    var t = document.getElementById('_toast');
+    if (!t) {
+      t = document.createElement('div');
+      t.id = '_toast'; t.className = 'copy-toast';
+      document.body.appendChild(t);
+    }
+    t.textContent = msg; t.classList.add('show');
+    clearTimeout(t._tid);
+    t._tid = setTimeout(function() { t.classList.remove('show'); }, 2200);
+  };
+
+  window.captureCard = function(card, cb) {
+    var btns = card.querySelector('.card-actions');
+    if (btns) btns.style.display = 'none';
+    html2canvas(card, { backgroundColor: '#fff', scale: 2, useCORS: true, logging: false })
+      .then(function(canvas) {
+        if (btns) btns.style.display = '';
+        cb(canvas);
+      });
+  };
+
+  window.downloadCard = function(btn) {
+    if (typeof html2canvas === 'undefined') { showToast('Carregando...'); return; }
+    var card = btn.parentNode.parentNode;
+    var titleEl = card.querySelector('.cl-card-title');
+    var name = titleEl ? titleEl.textContent.trim().replace(/\s+/g, '-').toLowerCase() : 'card';
+    name = name.replace(/[^a-z0-9\-]/g, '');
+    captureCard(card, function(canvas) {
+      var a = document.createElement('a');
+      a.download = 'mottu-' + name + '.png';
+      a.href = canvas.toDataURL('image/png');
+      a.click();
+      showToast('Download iniciado');
+    });
+  };
+
+  window.copyCard = function(btn) {
+    if (typeof html2canvas === 'undefined') { showToast('Carregando...'); return; }
+    var card = btn.parentNode.parentNode;
+    var table = card.querySelector('table');
+    if (table) {
+      var rows = Array.from(table.querySelectorAll('tr'));
+      var lines = rows.map(function(tr) {
+        var cells = Array.from(tr.querySelectorAll('th,td'));
+        return cells.map(function(td) {
+          return td.textContent.trim().split('\t').join(' ');
+        }).join('\t');
+      });
+      var tsv = lines.join('\n');
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(tsv)
+          .then(function() { showToast('Tabela copiada — cole no Excel'); })
+          .catch(function() { showToast('Permissao negada pelo browser'); });
+      } else {
+        var ta = document.createElement('textarea');
+        ta.value = tsv; document.body.appendChild(ta);
+        ta.select(); document.execCommand('copy');
+        document.body.removeChild(ta);
+        showToast('Tabela copiada');
+      }
+      return;
+    }
+    captureCard(card, function(canvas) {
+      canvas.toBlob(function(blob) {
+        if (navigator.clipboard && window.ClipboardItem) {
+          navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })])
+            .then(function() { showToast('Imagem copiada'); })
+            .catch(function() {
+              var a = document.createElement('a');
+              a.download = 'mottu-card.png';
+              a.href = canvas.toDataURL('image/png');
+              a.click();
+              showToast('Download iniciado');
+            });
+        } else {
+          var a = document.createElement('a');
+          a.download = 'mottu-card.png';
+          a.href = canvas.toDataURL('image/png');
+          a.click();
+        }
+      });
+    });
+  };
+
+  function inject() {
+    document.querySelectorAll('.cl-card, .cl-full').forEach(function(card) {
+      if (card.querySelector('.card-actions')) return;
+      var div = document.createElement('div');
+      div.className = 'card-actions';
+      div.innerHTML = '<button class="card-action-btn" title="Copiar" onclick="copyCard(this)"><span class="material-icons-round">content_copy</span></button><button class="card-action-btn" title="Download PNG" onclick="downloadCard(this)"><span class="material-icons-round">download</span></button>';
+      card.appendChild(div);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', inject);
+  } else {
+    inject();
+  }
+
+  var _orig = window.showPage;
+  if (_orig) {
+    window.showPage = function(p) { _orig(p); setTimeout(inject, 80); };
+  }
+})();
+
+</script>
 
 </body>
 </html>
