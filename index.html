@@ -770,6 +770,16 @@ body {
   transform: translateX(-50%) translateY(0);
 }
 
+
+/* Inspeções — tabela responsiva com scroll horizontal */
+#page-insp .cl-full { overflow: hidden; }
+#page-insp .cl-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+#page-insp .cl-table { table-layout: auto; width: 100%; min-width: 860px; }
+#page-insp .cl-table th,
+#page-insp .cl-table td { white-space: nowrap; }
+#page-insp .cl-table th:nth-child(3),
+#page-insp .cl-table td:nth-child(3) { white-space: normal; min-width: 130px; max-width: 160px; }
+
 </style>
 </head>
 <body>
@@ -787,6 +797,9 @@ body {
     </button>
     <button class="nav-tab" id="tab-warranty" onclick="showPage('warranty')">
       <span class="material-icons-round">build_circle</span>Warranty
+    </button>
+    <button class="nav-tab" id="tab-insp" onclick="showPage('insp')">
+      <span class="material-icons-round">inventory_2</span>Inspeções
     </button>
   </nav>
 </header>
@@ -1444,58 +1457,31 @@ document.head.appendChild(s);
             <td class="cl-obs">Informações incompletas</td>
           </tr>
           <tr>
-            <td>CHICOTE DA BOBINA — N6160250 <span style="font-size:9px;color:var(--gray-40)">(inv. 9,2E+07)</span></td>
+            <td>CHICOTE DA BOBINA — N6160250 <span style="font-size:9px;color:var(--gray-40)">4 invoices · inv. 9,2E+07</span></td>
             <td><span class="cl-badge cl-badge-pn">Mismatch</span></td>
             <td><span class="cl-badge cl-badge-negada">✗ Negada</span></td>
-            <td class="cl-num">3.622</td>
-            <td class="cl-num cl-val">$7.182,04</td>
+            <td class="cl-num">11.557</td>
+            <td class="cl-num cl-val cl-val-big">$22.916,28</td>
             <td class="cl-num">2d</td>
             <td class="cl-obs">Informações incompletas</td>
-          </tr>
-          <tr>
-            <td>CHICOTE DA BOBINA — N6160250 <span style="font-size:9px;color:var(--gray-40)">(inv. 9,2E+07)</span></td>
-            <td><span class="cl-badge cl-badge-pn">Mismatch</span></td>
-            <td><span class="cl-badge cl-badge-negada">✗ Negada</span></td>
-            <td class="cl-num">3.540</td>
-            <td class="cl-num cl-val">$7.019,44</td>
-            <td class="cl-num">2d</td>
-            <td class="cl-obs">Informações incompletas</td>
-          </tr>
-          <tr>
-            <td>CHICOTE DA BOBINA — N6160250 <span style="font-size:9px;color:var(--gray-40)">(inv. 9,2E+07)</span></td>
-            <td><span class="cl-badge cl-badge-pn">Mismatch</span></td>
-            <td><span class="cl-badge cl-badge-negada">✗ Negada</span></td>
-            <td class="cl-num">2.995</td>
-            <td class="cl-num cl-val">$5.938,76</td>
-            <td class="cl-num">2d</td>
-            <td class="cl-obs">Informações incompletas</td>
-          </tr>
-          <tr>
-            <td>CHICOTE DA BOBINA — N6160250 <span style="font-size:9px;color:var(--gray-40)">(inv. 9,2E+07)</span></td>
-            <td><span class="cl-badge cl-badge-pn">Mismatch</span></td>
-            <td><span class="cl-badge cl-badge-negada">✗ Negada</span></td>
-            <td class="cl-num">1.400</td>
-            <td class="cl-num cl-val">$2.776,04</td>
-            <td class="cl-num">2d</td>
-            <td class="cl-obs">Informações incompletas</td>
-          </tr>
-          <tr style="background:#FFF8E1">
-            <td>TANQUE DE COMBUSTIVEL PRETO — ND1402594D</td>
-            <td><span class="cl-badge cl-badge-defeito">Defective</span></td>
-            <td><span class="cl-badge cl-badge-andamento">⏳ Aguard. Portal</span></td>
-            <td class="cl-num">24</td>
-            <td class="cl-num cl-val">$537,60</td>
-            <td class="cl-num">—</td>
-            <td class="cl-obs">Verificar evidências</td>
           </tr>
           <tr style="background:#FFF8E1">
             <td>TANQUE DE COMBUSTIVEL PRETO — ND1402594D</td>
             <td><span class="cl-badge cl-badge-defeito">Defective</span></td>
             <td><span class="cl-badge cl-badge-andamento">⏳ Em Análise</span></td>
-            <td class="cl-num">1</td>
-            <td class="cl-num cl-val">$22,40</td>
+            <td class="cl-num">24</td>
+            <td class="cl-num cl-val">$537,60</td>
+            <td class="cl-num">—</td>
+            <td class="cl-obs">Submetido na TVS · Aguardando exemplar para verificação de vazamento pelo time de engenharia</td>
+          </tr>
+          <tr style="background:#FFF8E1">
+            <td>TANQUE DE COMBUSTIVEL PRETO — ND1402594D</td>
+            <td><span class="cl-badge cl-badge-defeito">Defective</span></td>
+            <td><span class="cl-badge cl-badge-andamento">⏳ Em Análise</span></td>
+            <td class="cl-num">2</td>
+            <td class="cl-num cl-val">$44,80</td>
             <td class="cl-num">1d</td>
-            <td class="cl-obs">BR/2026/70997-01139</td>
+            <td class="cl-obs">BR/2026/70997-01139 · Submetido na TVS</td>
           </tr>
           <tr style="background:#E8F5E6">
             <td>CAVALETE LATERAL — N6121290</td>
@@ -1507,10 +1493,8 @@ document.head.appendChild(s);
             <td class="cl-obs">R$9,54/un · USD 4,97 · Aguardando nova carga</td>
           </tr>
         </tbody>
-      </table>
+      </table></div>
     </div>
-  </div>
-
 
   <!-- Gráfico temporal -->
   <div class="cl-full" style="margin-top:14px">
@@ -1525,7 +1509,7 @@ document.head.appendChild(s);
         <span style="display:inline-block;width:10px;height:10px;background:#E65100;border-radius:2px"></span>Em andamento
       </span>
       <span style="display:flex;align-items:center;gap:5px;font-size:10px;font-family:'Barlow',sans-serif;color:var(--gray-60)">
-        <span style="display:inline-block;width:10px;height:10px;background:#4FAE45;border-radius:2px"></span>Aceita
+        <span style="display:inline-block;width:10px;height:10px;background:#4FAE45;border-radius:2px"></span>Ressarcida
       </span>
     </div>
 
@@ -1607,6 +1591,77 @@ document.head.appendChild(s);
 
     <div style="margin-top:12px;font-size:10px;color:var(--gray-40);font-family:'Poppins',sans-serif;line-height:1.6">
       Pico em Fev/26: 5 Transit Claims simultâneos totalizando <strong style="color:#C62828">$46,2K negados</strong> + $3,7K de Warranty. Barras mais escuras = camadas do mesmo mês.
+    </div>
+  </div>
+
+
+
+  <!-- Gráfico Cycle Time — Transit Claim -->
+  <div class="cl-full" style="margin-top:14px">
+    <div class="cl-card-title">Cycle Time Médio — Transit Claim (dias)</div>
+
+    <div style="margin-bottom:14px;display:flex;gap:18px;align-items:center;flex-wrap:wrap">
+      <span style="display:flex;align-items:center;gap:6px;font-size:10px;font-family:'Barlow',sans-serif;color:var(--gray-60)">
+        <svg width="20" height="10"><line x1="0" y1="5" x2="20" y2="5" stroke="#1565C0" stroke-width="2"/><circle cx="10" cy="5" r="3" fill="#1565C0"/></svg>Média acumulada
+      </span>
+      <span style="display:flex;align-items:center;gap:6px;font-size:10px;font-family:'Barlow',sans-serif;color:var(--gray-60)">
+        <svg width="20" height="10"><line x1="0" y1="5" x2="20" y2="5" stroke="#C62828" stroke-width="1.5" stroke-dasharray="4,2"/></svg>Meta (30d)
+      </span>
+      <span style="font-size:10px;font-family:'Barlow',sans-serif;color:var(--gray-40)">Média atual: <strong style="color:#1565C0">18d</strong></span>
+    </div>
+
+    <!-- SVG sem padding extra, eixo X como div HTML abaixo -->
+    <div style="position:relative">
+      <svg width="100%" height="150" viewBox="0 0 520 140" preserveAspectRatio="none" style="display:block;overflow:visible">
+
+        <!-- Grid lines apenas (sem labels Y) -->
+        <line x1="0" y1="0"   x2="520" y2="0"   stroke="#F5F5F5" stroke-width="1"/>
+        <line x1="0" y1="35"  x2="520" y2="35"  stroke="#F5F5F5" stroke-width="1"/>
+        <line x1="0" y1="70"  x2="520" y2="70"  stroke="#F5F5F5" stroke-width="1"/>
+        <line x1="0" y1="105" x2="520" y2="105" stroke="#F5F5F5" stroke-width="1"/>
+
+        <!-- Eixo X base -->
+        <line x1="0" y1="140" x2="520" y2="140" stroke="#E0E0E0" stroke-width="1"/>
+
+        <!-- Meta 30d → y=35 -->
+        <line x1="0" y1="35" x2="520" y2="35" stroke="#C62828" stroke-width="1.2" stroke-dasharray="5,3" opacity="0.6"/>
+        <text x="526" y="38" font-size="8" fill="#C62828" font-family="Barlow,sans-serif">30d</text>
+
+        <!-- Separadores de mês -->
+        <line x1="240" y1="0" x2="240" y2="140" stroke="#EEEEEE" stroke-width="1" stroke-dasharray="2,3"/>
+        <line x1="380" y1="0" x2="380" y2="140" stroke="#EEEEEE" stroke-width="1" stroke-dasharray="2,3"/>
+
+        <!-- Área sob a curva (sutil) -->
+        <polygon points="170,133 310,77 310,140 170,140" fill="#1565C0" opacity="0.06"/>
+
+        <!-- Linha conectando os dois pontos -->
+        <line x1="170" y1="133" x2="310" y2="77"
+          stroke="#1565C0" stroke-width="2.5"
+          stroke-linecap="round"/>
+
+        <!-- Ponto C1: Bobina 2d → x=170, y=133 -->
+        <circle cx="170" cy="133" r="6" fill="#1565C0"/>
+        <circle cx="170" cy="133" r="3" fill="white"/>
+        <text x="170" y="121" text-anchor="middle" font-size="10" font-weight="700" fill="#1565C0" font-family="Barlow,sans-serif">2d</text>
+
+        <!-- Ponto C2: avg 18d → x=310, y=77 -->
+        <circle cx="310" cy="77" r="6" fill="#1565C0"/>
+        <circle cx="310" cy="77" r="3" fill="white"/>
+        <text x="310" y="65" text-anchor="middle" font-size="10" font-weight="700" fill="#1565C0" font-family="Barlow,sans-serif">18d</text>
+
+      </svg>
+
+      <!-- Eixo X: labels dos meses como div HTML abaixo do SVG -->
+      <div style="display:flex;border-top:1px solid #E0E0E0;padding-top:6px;margin-top:-2px">
+        <div style="flex:0 0 32.7%;text-align:center;font-family:'Barlow',sans-serif;font-size:10px;color:#AAAAAA">Jan/26</div>
+        <div style="flex:0 0 26.9%;text-align:center;font-family:'Barlow',sans-serif;font-size:10px;font-weight:700;color:#1565C0">Fev/26</div>
+        <div style="flex:0 0 26.9%;text-align:center;font-family:'Barlow',sans-serif;font-size:10px;color:#AAAAAA">Mar/26</div>
+        <div style="flex:0 0 13.5%;text-align:center;font-family:'Barlow',sans-serif;font-size:10px;color:#AAAAAA">Abr/26</div>
+      </div>
+    </div>
+
+    <div style="margin-top:12px;font-size:10px;color:var(--gray-40);font-family:'Poppins',sans-serif;line-height:1.6">
+      C1: <strong style="color:#2E7D32">2d</strong> (Chicote Bobina) · C2: média acumulada <strong style="color:#1565C0">18d</strong> após 2 claims finalizados. Abaixo da meta de <strong style="color:#C62828">30d</strong>. Novos pontos serão adicionados conforme claims fecharem.
     </div>
   </div>
 
@@ -1742,7 +1797,179 @@ document.head.appendChild(s);
             <td class="cl-obs">Peça modificada</td>
           </tr>
         </tbody>
-      </table>
+      </table></div>
+    </div>
+
+  <!-- Gráfico temporal Warranty -->
+  <div class="cl-full" style="margin-top:14px">
+    <div class="cl-card-title">Evolução de Claims por Mês (USD)</div>
+
+    <div style="margin-bottom:14px;display:flex;gap:18px;flex-wrap:wrap">
+      <span style="display:flex;align-items:center;gap:5px;font-size:10px;font-family:'Barlow',sans-serif;color:var(--gray-60)">
+        <span style="display:inline-block;width:10px;height:10px;background:#C62828;border-radius:2px"></span>Negada
+      </span>
+      <span style="display:flex;align-items:center;gap:5px;font-size:10px;font-family:'Barlow',sans-serif;color:var(--gray-60)">
+        <span style="display:inline-block;width:10px;height:10px;background:#4FAE45;border-radius:2px"></span>Ressarcida
+      </span>
+    </div>
+
+    <div style="display:flex;align-items:flex-end;gap:10px;height:210px;position:relative;padding-top:24px">
+
+      <!-- Grid -->
+      <div style="position:absolute;left:0;right:0;top:24px;height:186px;pointer-events:none">
+        <div style="position:absolute;left:0;right:0;top:0;border-top:1px dashed #EEEEEE"></div>
+        <div style="position:absolute;left:0;right:0;top:25%;border-top:1px dashed #EEEEEE"></div>
+        <div style="position:absolute;left:0;right:0;top:50%;border-top:1px dashed #EEEEEE"></div>
+        <div style="position:absolute;left:0;right:0;top:75%;border-top:1px dashed #EEEEEE"></div>
+      </div>
+
+      <!-- Nov/25 — sem claims -->
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;position:relative;z-index:1">
+        <div style="width:100%;height:2px;background:#EEEEEE;border-radius:2px"></div>
+      </div>
+
+      <!-- Dez/25 — Campana: $228,80 negada -->
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;position:relative;z-index:1">
+        <div style="width:100%">
+          <div style="width:100%;height:4px;background:#C62828;border-radius:3px 3px 0 0;display:flex;align-items:center;justify-content:center;overflow:visible;position:relative">
+            <span style="position:absolute;bottom:6px;font-size:7px;font-weight:700;color:#C62828;white-space:nowrap;font-family:Barlow,sans-serif">$229</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Jan/26 — sem claims -->
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;position:relative;z-index:1">
+        <div style="width:100%;height:2px;background:#EEEEEE;border-radius:2px"></div>
+      </div>
+
+      <!-- Fev/26 — Carcaça $2.781 + Chassi $871 negadas -->
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;position:relative;z-index:1">
+        <div style="width:100%">
+          <!-- Chassi $871 (topo) -->
+          <div style="width:100%;height:15px;background:#B71C1C;border-radius:3px 3px 0 0;display:flex;align-items:flex-start;justify-content:center;padding-top:2px">
+            <span style="font-size:6px;font-weight:700;color:rgba(255,255,255,.9);font-family:Barlow,sans-serif">$871</span>
+          </div>
+          <!-- Carcaça $2.781 -->
+          <div style="width:100%;height:47px;background:#C62828;display:flex;align-items:flex-start;justify-content:center;padding-top:3px">
+            <span style="font-size:8px;font-weight:700;color:rgba(255,255,255,.9);font-family:Barlow,sans-serif">$2,78K</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mar/26 — Roda Traseira $10.786 negada -->
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;position:relative;z-index:1">
+        <div style="width:100%">
+          <div style="width:100%;height:186px;background:#C62828;border-radius:3px 3px 0 0;display:flex;align-items:flex-start;justify-content:center;padding-top:5px">
+            <span style="font-size:9px;font-weight:700;color:rgba(255,255,255,.9);font-family:Barlow,sans-serif">$10,79K</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Abr/26 — sem novos -->
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;position:relative;z-index:1">
+        <div style="width:100%;height:2px;background:#EEEEEE;border-radius:2px"></div>
+      </div>
+
+    </div>
+
+    <!-- Labels -->
+    <div style="display:flex;gap:10px;margin-top:6px">
+      <div style="flex:1;text-align:center;font-family:'Barlow',sans-serif;font-size:10px;color:#AAAAAA">Nov/25</div>
+      <div style="flex:1;text-align:center;font-family:'Barlow',sans-serif;font-size:10px;color:#AAAAAA">Dez/25</div>
+      <div style="flex:1;text-align:center;font-family:'Barlow',sans-serif;font-size:10px;color:#AAAAAA">Jan/26</div>
+      <div style="flex:1;text-align:center;font-family:'Barlow',sans-serif;font-size:10px;font-weight:700;color:#C62828">Fev/26</div>
+      <div style="flex:1;text-align:center;font-family:'Barlow',sans-serif;font-size:10px;font-weight:700;color:#C62828">Mar/26</div>
+      <div style="flex:1;text-align:center;font-family:'Barlow',sans-serif;font-size:10px;color:#AAAAAA">Abr/26</div>
+    </div>
+
+    <div style="margin-top:12px;font-size:10px;color:var(--gray-40);font-family:'Poppins',sans-serif;line-height:1.6">
+      Pico em Mar/26: Roda Traseira Sem Pneu — 501 un · <strong style="color:#C62828">$10,79K negados</strong>. Todas as 4 claims negadas por diferentes motivos — fora do prazo, limite 2%, não contemplada e peça modificada.
+    </div>
+  </div>
+
+
+
+  <!-- Gráfico Cycle Time — Warranty -->
+  <div class="cl-full" style="margin-top:14px">
+    <div class="cl-card-title">Cycle Time Médio — Warranty (dias)</div>
+
+    <div style="margin-bottom:14px;display:flex;gap:18px;align-items:center;flex-wrap:wrap">
+      <span style="display:flex;align-items:center;gap:6px;font-size:10px;font-family:'Barlow',sans-serif;color:var(--gray-60)">
+        <svg width="20" height="10"><line x1="0" y1="5" x2="20" y2="5" stroke="#6A1B9A" stroke-width="2"/><circle cx="10" cy="5" r="3" fill="#6A1B9A"/></svg>Cycle time médio mensal
+      </span>
+      <span style="display:flex;align-items:center;gap:6px;font-size:10px;font-family:'Barlow',sans-serif;color:var(--gray-60)">
+        <svg width="20" height="10"><line x1="0" y1="5" x2="20" y2="5" stroke="#4FAE45" stroke-width="1.5" stroke-dasharray="4,2"/></svg>Meta (30d)
+      </span>
+      <span style="font-size:10px;font-family:'Barlow',sans-serif;color:var(--gray-40)">Média geral: <strong style="color:#6A1B9A">40d</strong></span>
+    </div>
+
+    <div style="position:relative;padding:0 16px">
+      <svg width="100%" height="160" viewBox="0 0 520 140" preserveAspectRatio="none" style="overflow:visible">
+
+        <!-- Grid -->
+        <line x1="0" y1="0"   x2="520" y2="0"   stroke="#F5F5F5" stroke-width="1"/>
+        <line x1="0" y1="35"  x2="520" y2="35"  stroke="#F5F5F5" stroke-width="1"/>
+        <line x1="0" y1="70"  x2="520" y2="70"  stroke="#F5F5F5" stroke-width="1"/>
+        <line x1="0" y1="105" x2="520" y2="105" stroke="#F5F5F5" stroke-width="1"/>
+        <line x1="0" y1="140" x2="520" y2="140" stroke="#F5F5F5" stroke-width="1"/>
+
+        <!-- Labels Y (max 120d) -->
+        <text x="-6" y="4"   text-anchor="end" font-size="8" fill="#CCCCCC" font-family="Barlow,sans-serif">120d</text>
+        <text x="-6" y="39"  text-anchor="end" font-size="8" fill="#CCCCCC" font-family="Barlow,sans-serif">90d</text>
+        <text x="-6" y="74"  text-anchor="end" font-size="8" fill="#CCCCCC" font-family="Barlow,sans-serif">60d</text>
+        <text x="-6" y="109" text-anchor="end" font-size="8" fill="#CCCCCC" font-family="Barlow,sans-serif">30d</text>
+        <text x="-6" y="144" text-anchor="end" font-size="8" fill="#CCCCCC" font-family="Barlow,sans-serif">0d</text>
+
+        <!-- Meta 30d (y=105) -->
+        <line x1="0" y1="105" x2="520" y2="105" stroke="#4FAE45" stroke-width="1" stroke-dasharray="5,3" opacity="0.7"/>
+        <text x="526" y="108" font-size="8" fill="#4FAE45" font-family="Barlow,sans-serif">30d</text>
+
+        <!-- Média acumulada: Dez/25=104d, Fev/26=47d, Mar/26=40d -->
+        <!-- y = 140-(valor/120)*140 -->
+        <!-- Dez/25: y=19  Fev/26: y=85  Mar/26: y=93 -->
+
+        <!-- Área sob a curva -->
+        <polygon points="87,19 260,85 347,93 347,140 87,140"
+          fill="#6A1B9A" opacity="0.07"/>
+
+        <!-- Linha de evolução -->
+        <polyline points="87,19 260,85 347,93"
+          fill="none" stroke="#6A1B9A" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round"/>
+
+        <!-- Pontos com label -->
+        <circle cx="87"  cy="19" r="6" fill="#6A1B9A"/>
+        <circle cx="87"  cy="19" r="3" fill="white"/>
+        <text x="87"  y="9" text-anchor="middle" font-size="10" font-weight="700" fill="#6A1B9A" font-family="Barlow,sans-serif">104d</text>
+
+        <circle cx="260" cy="85" r="6" fill="#6A1B9A"/>
+        <circle cx="260" cy="85" r="3" fill="white"/>
+        <text x="260" y="75" text-anchor="middle" font-size="10" font-weight="700" fill="#6A1B9A" font-family="Barlow,sans-serif">47d</text>
+
+        <circle cx="347" cy="93" r="6" fill="#6A1B9A"/>
+        <circle cx="347" cy="93" r="3" fill="white"/>
+        <text x="347" y="83" text-anchor="middle" font-size="10" font-weight="700" fill="#6A1B9A" font-family="Barlow,sans-serif">40d</text>
+
+        <!-- Seta de tendência de queda -->
+        <text x="200" y="55" text-anchor="middle" font-size="9" fill="#6A1B9A" opacity="0.5" font-family="Barlow,sans-serif">▼ -62%</text>
+
+      </svg>
+    </div>
+
+    <!-- Labels meses -->
+    <div style="display:flex;padding:0 16px;margin-top:4px">
+      <div style="flex:0 0 16.7%;text-align:center;font-family:'Barlow',sans-serif;font-size:10px;color:#AAAAAA">Dez/25</div>
+      <div style="flex:0 0 16.7%;text-align:center;font-family:'Barlow',sans-serif;font-size:10px;color:#AAAAAA">Jan/26</div>
+      <div style="flex:0 0 16.7%;text-align:center;font-family:'Barlow',sans-serif;font-size:10px;font-weight:700;color:#6A1B9A">Fev/26</div>
+      <div style="flex:0 0 16.7%;text-align:center;font-family:'Barlow',sans-serif;font-size:10px;font-weight:700;color:#6A1B9A">Mar/26</div>
+      <div style="flex:0 0 16.7%;text-align:center;font-family:'Barlow',sans-serif;font-size:10px;color:#AAAAAA">Abr/26</div>
+      <div style="flex:0 0 16.6%;"></div>
+    </div>
+
+    <div style="margin-top:12px;font-size:10px;color:var(--gray-40);font-family:'Poppins',sans-serif;line-height:1.6">
+      Queda de <strong>104d → 18d</strong> entre Dez/25 e Fev/26 — redução de 83% no cycle time médio.
+      Pico causado pela Campana da Embreagem (peça modificada — análise demorada pela TVS).
+      Mar/26 estabilizou em 21d, abaixo da meta de <strong style="color:#2E7D32">30 dias</strong>.
     </div>
   </div>
 
@@ -1754,25 +1981,21 @@ document.head.appendChild(s);
 
 <script>
 function showPage(page) {
-  var pages = ['shield','tc','warranty'];
-  var tabs  = ['tab-shield','tab-tc','tab-warranty'];
-  // Esconde tudo
+  var tabs = ['tab-shield','tab-tc','tab-warranty','tab-insp'];
   document.getElementById('page-shield').classList.add('hidden');
-  var ptc = document.getElementById('page-tc');
-  var pw  = document.getElementById('page-warranty');
-  if(ptc) ptc.classList.remove('visible');
-  if(pw)  pw.classList.remove('visible');
+  ['page-tc','page-warranty','page-insp'].forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) el.classList.remove('visible');
+  });
   tabs.forEach(function(t){ var el=document.getElementById(t); if(el) el.classList.remove('active'); });
-  // Mostra selecionado
   if(page === 'shield'){
     document.getElementById('page-shield').classList.remove('hidden');
     document.getElementById('tab-shield').classList.add('active');
-  } else if(page === 'tc'){
-    if(ptc) ptc.classList.add('visible');
-    document.getElementById('tab-tc').classList.add('active');
-  } else if(page === 'warranty'){
-    if(pw) pw.classList.add('visible');
-    document.getElementById('tab-warranty').classList.add('active');
+  } else {
+    var pg = document.getElementById('page-' + page);
+    if(pg) pg.classList.add('visible');
+    var tb = document.getElementById('tab-' + page);
+    if(tb) tb.classList.add('active');
   }
 }
 
@@ -1892,5 +2115,207 @@ function showPage(page) {
 
 </script>
 
+
+<!-- ── INSPEÇÕES PAGE ── -->
+<div class="page-claims" id="page-insp">
+
+  <div class="cl-header">
+    <h1 class="cl-title">Inspeções — Inventário Rotativo nos CDs</h1>
+    <p class="cl-sub">Planos gerados em 22/04/2026 · Deadline: 27/04/2026</p>
+  </div>
+
+  <!-- KPIs -->
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-card-lbl">Total de Planos</div>
+      <div class="kpi-card-val">5</div>
+      <div class="kpi-card-sub">2 SKUs · 3 CDs</div>
+    </div>
+    <div class="kpi-card" style="border-left:3px solid #2E7D32">
+      <div class="kpi-card-lbl">Concluídos</div>
+      <div class="kpi-card-val" style="color:#2E7D32">3</div>
+      <div class="kpi-card-sub">60% do total</div>
+    </div>
+    <div class="kpi-card" style="border-left:3px solid #E65100">
+      <div class="kpi-card-lbl">Pendentes</div>
+      <div class="kpi-card-val" style="color:#E65100">2</div>
+      <div class="kpi-card-sub">40% do total</div>
+    </div>
+    <div class="kpi-card" style="border-left:3px solid #4FAE45">
+      <div class="kpi-card-lbl">NC Identificado</div>
+      <div class="kpi-card-val" style="color:#2E7D32">0,0%</div>
+      <div class="kpi-card-sub">nos concluídos</div>
+    </div>
+  </div>
+
+  <!-- Cards por CD -->
+  <div style="display:flex;flex-direction:column;gap:14px">
+
+    <!-- CD-SC -->
+    <div class="cl-full">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+        <div>
+          <span style="font-family:'Barlow',sans-serif;font-size:16px;font-weight:800;color:var(--black);letter-spacing:-.02em">CD-SC MOTTU</span>
+          <span style="margin-left:10px;font-family:'Barlow',sans-serif;font-size:11px;font-weight:700;background:#E8F5E6;color:#2E7D32;padding:3px 10px;border-radius:20px">2 planos · 2 concluídos</span>
+        </div>
+        <span style="font-family:'Barlow',sans-serif;font-size:11px;color:var(--gray-40)">Operador: Kennedy</span>
+      </div>
+      <div class="cl-table-wrap"><table class="cl-table">
+        <thead>
+          <tr><th>ID Plano</th><th>SKU</th><th>Descrição</th><th>Endereço</th><th>Dt. Inspeção</th><th>Prev.</th><th>Contada</th><th>Diferença</th><th>% NC</th><th>Classificação</th><th>Ação</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+
+          <tr>
+            <td style="font-family:'Barlow',sans-serif;font-size:9px;color:var(--gray-40)">PLN-SC4222026NA120500</td>
+            <td><strong>NA120500</strong></td>
+            <td>ESTRIBO — ESD/SPT</td>
+            <td class="cl-num">G10.10</td>
+            <td class="cl-num">20/04/2026</td>
+            <td class="cl-num">80</td>
+            <td class="cl-num">80</td>
+            <td class="cl-num">0</td>
+            <td class="cl-num" style="color:#2E7D32;font-weight:700">0,0%</td>
+            <td><span class="cl-badge" style="background:#E8F5E6;color:#2E7D32">✓ Aceitável</span></td>
+            <td style="font-size:10px;color:var(--gray-40)">Nenhuma</td>
+            <td><span class="cl-badge" style="background:#2E7D32;color:#fff">✓ Concluído</span></td>
+          </tr>
+          <tr>
+            <td style="font-family:'Barlow',sans-serif;font-size:9px;color:var(--gray-40)">PLN-SC4222026ND010040</td>
+            <td><strong>ND010040</strong></td>
+            <td>CABEÇOTE DE ALUMÍNIO DO MOTOR — ESD/SPT</td>
+            <td class="cl-num">I13.10</td>
+            <td class="cl-num">—</td>
+            <td class="cl-num">2</td>
+            <td class="cl-num">—</td>
+            <td class="cl-num">—</td>
+            <td class="cl-num">—</td>
+            <td>—</td>
+            <td>—</td>
+            <td><span class="cl-badge" style="background:#2E7D32;color:#fff">✓ Concluído</span></td>
+          </tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <!-- CD-PE -->
+    <div class="cl-full">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+        <div>
+          <span style="font-family:'Barlow',sans-serif;font-size:16px;font-weight:800;color:var(--black);letter-spacing:-.02em">CD-PE MOTTU</span>
+          <span style="margin-left:10px;font-family:'Barlow',sans-serif;font-size:11px;font-weight:700;background:#E8F5E6;color:#2E7D32;padding:3px 10px;border-radius:20px">1 plano · concluído</span>
+        </div>
+        <span style="font-family:'Barlow',sans-serif;font-size:11px;color:var(--gray-40)">Deadline: 27/04/2026</span>
+      </div>
+      <div class="cl-table-wrap"><table class="cl-table">
+        <thead>
+          <tr><th>ID Plano</th><th>SKU</th><th>Descrição</th><th>Endereço</th><th>Dt. Inspeção</th><th>Prev.</th><th>Contada</th><th>Diferença</th><th>% NC</th><th>Classificação</th><th>Ação</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="font-family:'Barlow',sans-serif;font-size:9px;color:var(--gray-40)">PLN-PE4222026NA120500</td>
+            <td><strong>NA120500</strong></td>
+            <td>ESTRIBO — ESD/SPT</td>
+            <td class="cl-num">A44.10</td>
+            <td class="cl-num">27/04/2026 <span style="color:#C62828;font-size:8px;font-weight:700">⚠ Atrasado</span></td>
+            <td class="cl-num">50</td>
+            <td class="cl-num">40</td>
+            <td class="cl-num" style="color:#C62828;font-weight:700">-10</td>
+            <td class="cl-num" style="color:#2E7D32;font-weight:700">0,0%</td>
+            <td><span class="cl-badge" style="background:#E8F5E6;color:#2E7D32">✓ Aceitável</span></td>
+            <td style="font-size:10px;color:var(--gray-40)">Nenhuma</td>
+            <td><span class="cl-badge" style="background:#2E7D32;color:#fff">✓ Concluído</span></td>
+          </tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <!-- CD-SP -->
+    <div class="cl-full">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+        <div>
+          <span style="font-family:'Barlow',sans-serif;font-size:16px;font-weight:800;color:var(--black);letter-spacing:-.02em">CD-SP MOTTU</span>
+          <span style="margin-left:10px;font-family:'Barlow',sans-serif;font-size:11px;font-weight:700;background:#FFEBEE;color:#C62828;padding:3px 10px;border-radius:20px">2 planos · pendentes</span>
+        </div>
+        <span style="font-family:'Barlow',sans-serif;font-size:11px;color:var(--gray-40)">Deadline: 27/04/2026</span>
+      </div>
+      <div class="cl-table-wrap"><table class="cl-table">
+        <thead>
+          <tr><th>ID Plano</th><th>SKU</th><th>Descrição</th><th>Endereço</th><th>Dt. Inspeção</th><th>Prev.</th><th>Contada</th><th>Diferença</th><th>% NC</th><th>Classificação</th><th>Ação</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr style="background:#FFEBEE">
+            <td style="font-family:'Barlow',sans-serif;font-size:9px;color:var(--gray-40)">PLN-SP4222026NA120500</td>
+            <td><strong>NA120500</strong></td>
+            <td>ESTRIBO — ESD/SPT</td>
+            <td class="cl-num">D7.10</td>
+            <td class="cl-num">—</td>
+            <td class="cl-num">50</td>
+            <td class="cl-num">—</td>
+            <td class="cl-num">—</td>
+            <td class="cl-num">—</td>
+            <td>—</td>
+            <td>—</td>
+            <td><span class="cl-badge cl-badge-negada">⚠ Pendente</span></td>
+          </tr>
+          <tr style="background:#FFEBEE">
+            <td style="font-family:'Barlow',sans-serif;font-size:9px;color:var(--gray-40)">PLN-SP4222026ND010040</td>
+            <td><strong>ND010040</strong></td>
+            <td>CABEÇOTE DE ALUMÍNIO DO MOTOR — ESD/SPT</td>
+            <td class="cl-num">G23.10</td>
+            <td class="cl-num">—</td>
+            <td class="cl-num">20</td>
+            <td class="cl-num">—</td>
+            <td class="cl-num">—</td>
+            <td class="cl-num">—</td>
+            <td>—</td>
+            <td>—</td>
+            <td><span class="cl-badge cl-badge-negada">⚠ Pendente</span></td>
+          </tr>
+        </tbody>
+      </table></div>
+    </div>
+
+  </div><!-- /cards por CD -->
+
+  <!-- Barra de progresso geral -->
+  <div class="cl-full" style="margin-top:14px">
+    <div class="cl-card-title">Progresso geral do ciclo</div>
+    <div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap">
+      <div style="flex:1;min-width:200px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:5px">
+          <span style="font-family:'Barlow',sans-serif;font-size:11px;color:var(--gray-60)">Planos concluídos</span>
+          <span style="font-family:'Barlow',sans-serif;font-size:11px;font-weight:700;color:#2E7D32">3 / 5 (60%)</span>
+        </div>
+        <div style="height:8px;background:#EEEEEE;border-radius:4px;overflow:hidden">
+          <div style="width:60%;height:100%;background:#4FAE45;border-radius:4px"></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:24px;flex-wrap:wrap">
+        <div style="text-align:center">
+          <div style="font-family:'Barlow',sans-serif;font-size:20px;font-weight:800;color:#2E7D32">3</div>
+          <div style="font-size:10px;color:var(--gray-40)">Concluídos</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-family:'Barlow',sans-serif;font-size:20px;font-weight:800;color:#E65100">0</div>
+          <div style="font-size:10px;color:var(--gray-40)">Em andamento</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-family:'Barlow',sans-serif;font-size:20px;font-weight:800;color:#C62828">2</div>
+          <div style="font-size:10px;color:var(--gray-40)">Pendentes</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-family:'Barlow',sans-serif;font-size:20px;font-weight:800;color:#4FAE45">0,0%</div>
+          <div style="font-size:10px;color:var(--gray-40)">% NC nos inspecionados</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cl-fontes">
+    <span class="cl-fontes-lbl">Fonte</span>
+    <code>Planos de inspeção · Planilha de resultados · Pipefy</code>
+  </div>
+</div>
 </body>
 </html>
